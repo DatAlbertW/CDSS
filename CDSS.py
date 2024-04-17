@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 def decision_tree():
-    st.title("Initial Evaluation of Genital Ulcers in Sexually Active Patients")
+    st.title("Initial Evaluation of New Genital Ulcers in Sexually Active Patients")
     st.caption("Follow the questions to guide the management of genital ulcers.")
     st.markdown("---")
 
@@ -45,6 +45,16 @@ def decision_tree():
                 navigate_page('C')
             else:
                 navigate_page('D')
+
+    elif st.session_state['page'] == 'C':
+        st.info("Initiate empiric treatment for that disease and await further testing.")
+        if st.button('Reset Decision Tree', key='reset_in_c'):
+            reset_tree()
+
+    elif st.session_state['page'] == 'D':
+        ulcer_painful = st.radio("Is the ulcer painful?", ('Yes', 'No'), key='ulcer_painful')
+        if st.button('Confirm Pain Status', key='confirm_pain_status'):
+            navigate_page('E' if ulcer_painful == 'Yes' else 'I')
 
     elif st.session_state['page'] == 'E':
         herpes_consistent = st.radio("Is the appearance consistent with Herpes simplex virus (HSV)?", ('Yes', 'No'), key='herpes_consistent')
