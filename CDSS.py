@@ -1,4 +1,5 @@
 import streamlit as st
+from datetime import datetime
 
 def decision_tree():
     st.title("STI-Related Genital Ulcer Management Decision Tree")
@@ -7,15 +8,30 @@ def decision_tree():
 
     # Initialize state management
     if 'page' not in st.session_state:
-        st.session_state['page'] = 'B'  # Start at step B according to the tree
+        st.session_state['page'] = 'intro'  # Start at the introduction step
 
     def navigate_page(page):
         st.session_state['page'] = page
 
     # Function to reset the decision tree
     def reset_tree():
-        st.session_state['page'] = 'B'
+        st.session_state['page'] = 'intro'
         st.experimental_rerun()
+
+    # Introduction page for demographics
+    if st.session_state['page'] == 'intro':
+        with st.form("patient_info"):
+            st.subheader("Patient Demographics")
+            name = st.text_input("Name")
+            birth_date = st.date_input("Birth Date", min_value=datetime(1900, 1, 1), max_value=datetime.today())
+            gender = st.selectbox("Gender", ["Male", "Female", "Other"])
+            submit = st.form_submit_button("Submit")
+
+            if submit:
+                st.session_state['patient_name'] = name
+                st.session_state['birth_date'] = birth_date
+                st.session_state['gender'] = gender
+                navigate_page('B')
 
     # Display questions based on the page number
     if st.session_state['page'] == 'B':
@@ -32,7 +48,7 @@ def decision_tree():
 
     elif st.session_state['page'] == 'C':
         st.info("Initiate empiric treatment for that disease and await further testing.")
-        if st.button('Reset Decision Tree', on_click=reset_tree):
+        if st.button('Reset Decision Tree'):
             reset_tree()
 
     elif st.session_state['page'] == 'D':
@@ -76,10 +92,10 @@ def decision_tree():
         if st.button('Confirm LGV Risk'):
             navigate_page('N' if lgv_risk == 'Yes' else 'O')
 
-    # General reset button shown at each step for convenience
-    st.button('Reset Decision Tree', on_click=reset_tree)
+        # General reset button shown at each step for convenience
+    if st.session_state['page'] != 'intro':
+        st.button('Reset Decision Tree', on_click=reset_tree)
 
 if __name__ == "__main__":
     st.set_page_config(page_title="STI Management Decision Tree", layout='wide')
     decision_tree()
-
