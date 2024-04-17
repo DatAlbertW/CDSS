@@ -75,7 +75,7 @@ def decision_tree():
             navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
     elif st.session_state['page'] == 'F':
-        st.subheader("Recommended Treatments for Herpes")
+        st.subheader("Recommended Treatment Options for Herpes")
         st.table({
             "Medication": ["Acyclovir", "Famciclovir", "Valacyclovir"],
             "Dosage": ["400 mg three times daily", "250 mg three times daily", "1000 mg twice daily"],
@@ -83,13 +83,21 @@ def decision_tree():
             "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
         })
         st.write("Options for recurrent disease include: Chronic suppression, Episodic therapy, or no intervention.")
-        if st.button('Reset Decision Tree', key='reset_in_f'):
-            reset_tree()
+        if st.button('Click if Treatment Fails or Initial Tests are Negative'):
+            navigate_page('H')
 
     elif st.session_state['page'] == 'G':
         st.info("Consider alternative diagnosis (e.g., syphilis, chancroid). Administer empiric treatment if risk factors are present.")
-        if st.button('Reset Decision Tree', on_click=reset_tree):
+        if st.button('Click if Treatment Fails or Initial Tests are Negative'):
+            navigate_page('H')
+
+
+    elif st.session_state['page'] == 'H':
+        st.subheader("Further Evaluation")
+        st.write("If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
+        if st.button('Reset Decision Tree'):
             reset_tree()
+    
 
     elif st.session_state['page'] == 'I':
         rapid_syphilis = st.radio("Is rapid syphilis testing available?", ('Yes', 'No'), key='rapid_syphilis')
@@ -113,7 +121,7 @@ def decision_tree():
 
     # General reset button shown at each step for convenience
     if st.session_state['page'] != 'intro' and not st.session_state['page'] in ['C', 'F']:
-        if st.button('Reset Decision Tree', key=f'reset_{st.session_state["page"]}'):
+        if st.button('Reset', key=f'reset_{st.session_state["page"]}'):
             reset_tree()
 
 if __name__ == "__main__":
