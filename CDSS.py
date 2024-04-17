@@ -51,7 +51,7 @@ def decision_tree():
 # PAGE C
     elif st.session_state['page'] == 'C':
         st.info("Initiate empiric treatment for that disease and await further testing.")
-        if st.button('Reset Decision Tree', key='reset_in_c'):
+        if st.button('Reset', key='reset_in_c'):
             reset_tree()
 
 # PAGE D
@@ -104,7 +104,7 @@ def decision_tree():
     elif st.session_state['page'] == 'H':
         st.subheader("Further Evaluation")
         st.write("If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
-        if st.button('Reset Decision Tree'):
+        if st.button('Reset'):
             reset_tree()
     
 # PAGE I
