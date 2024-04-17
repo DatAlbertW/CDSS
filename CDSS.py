@@ -2,7 +2,7 @@ import streamlit as st
 from datetime import datetime
 
 def decision_tree():
-    st.title("STI-Related Genital Ulcer Management Decision Tree")
+    st.title("Initial Evaluation of Genital Ulcers in Sexually Active Patients")
     st.caption("Follow the questions to guide the management of genital ulcers.")
     st.markdown("---")
 
@@ -46,20 +46,15 @@ def decision_tree():
             else:
                 navigate_page('D')
 
-    elif st.session_state['page'] == 'C':
-        st.info("Initiate empiric treatment for that disease and await further testing.")
-        if st.button('Reset Decision Tree', key='reset_in_c'):
-            reset_tree()
-
-    elif st.session_state['page'] == 'D':
-        ulcer_painful = st.radio("Is the ulcer painful?", ('Yes', 'No'), key='ulcer_painful')
-        if st.button('Confirm Pain Status', key='confirm_pain_status'):
-            navigate_page('E' if ulcer_painful == 'Yes' else 'I')
-
     elif st.session_state['page'] == 'E':
         herpes_consistent = st.radio("Is the appearance consistent with Herpes simplex virus (HSV)?", ('Yes', 'No'), key='herpes_consistent')
-        if st.button("Info on Clinical Appearance of Herpes Ulcers", key='herpes_info'):
-            st.info("Clinical Appearance of Herpes Ulcers: PAINFUL, Grouped vesicles on erythematous base, Shallow ulcerations. Possible large, crusted erosions in immunosuppressed patients.")
+        # Using emoji as an info icon with a hover effect in Markdown
+        st.markdown(
+            f"""<span style='font-size:16px;'>🛈</span>
+            <span style="display:inline-block; border-bottom: 1px dotted; cursor: help;"
+            title="Clinical Appearance of Herpes Ulcers: PAINFUL, Grouped vesicles on erythematous base, Shallow ulcerations. Possible large, crusted erosions in immunosuppressed patients.">
+            Hover for info on Herpes Ulcers</span>""", unsafe_allow_html=True)
+        
         if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
             navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
