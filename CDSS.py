@@ -71,10 +71,10 @@ def decision_tree():
         if st.button("ℹ️", key="info_button"):
             st.info("""
             **Clinical Appearance of Herpes Ulcers:**
-            - **PAINFUL:** Pain is a common symptom.
+            - **PAINFUL (common symptom).**
             - **Grouped Vesicles:** These appear on an erythematous base.
             - **Shallow Ulcerations:** Typical presentation.
-            - **Possible Large, Crusted Erosions:** Can occur in immunosuppressed patients.
+            - **Large, Crusted Erosions:** Can occur in immunosuppressed patients.
             """)
 
         if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
