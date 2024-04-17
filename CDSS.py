@@ -2,100 +2,103 @@ import streamlit as st
 
 def decision_tree():
     st.title("STI-Related Genital Ulcer Management Decision Tree")
-    st.write("Initial Evaluation Includes: Careful Clinical History, Physical Examination and Baseline Laboratory Testing.")
+    st.caption("Please follow the questions below to guide the management of genital ulcers.")
+    st.markdown("---")
 
-    # State management for navigation
+    # Initialize state management
     if 'page' not in st.session_state:
-        st.session_state.page = 1
+        st.session_state['page'] = 1
 
-    # Page flow control
-    if st.session_state.page == 1:
+    def navigate_page(page_num):
+        st.session_state['page'] = page_num
+        st.experimental_rerun()
+
+    # Display questions based on the page number
+    if st.session_state['page'] == 1:
+        st.subheader("Initial Evaluation")
+        st.write("Careful Clinical History, Physical Examination, and Baseline Laboratory Testing have been conducted.")
+        st.markdown("---")
         sti_exposure = st.radio(
             "Has the patient had a known exposure to an STI that causes genital ulcers in the last 90 days?",
-            ('Yes', 'No'))
+            ('Yes', 'No'), key='sti_exposure')
 
         if st.button('Next'):
             if sti_exposure == 'Yes':
-                st.write("Initiate empiric treatment for that disease and await further testing.")
-                st.session_state.page = 99  # Ends the flow
+                st.info("Initiate empiric treatment for that disease and await further testing.")
+                navigate_page(99)  # Ends the flow
             else:
-                st.session_state.page = 2
+                navigate_page(2)
 
-    if st.session_state.page == 2:
+    elif st.session_state['page'] == 2:
         ulcer_painful = st.radio(
             "Is the ulcer painful?",
-            ('Yes', 'No'))
+            ('Yes', 'No'), key='ulcer_painful')
 
         if st.button('Next'):
-            if ulcer_painful == 'Yes':
-                st.session_state.page = 3
-            else:
-                st.session_state.page = 5
+            navigate_page(3 if ulcer_painful == 'Yes' else 5)
 
-    if st.session_state.page == 3:
+    elif st.session_state['page'] == 3:
         herpes_consistent = st.radio(
-            "Is the Appearance consistent with Herpes simplex virus (HSV)?",
-            ('Yes', 'No'))
+            "Is the appearance consistent with Herpes simplex virus (HSV)?",
+            ('Yes', 'No'), key='herpes_consistent')
         
         if st.button('Next'):
             if herpes_consistent == 'Yes':
-                st.write("Treat Empirically for HSV.")
-                st.write("If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
-                st.session_state.page = 99  # Ends the flow
+                st.info("Treat empirically for HSV and evaluate further if initial therapy is ineffective or lab tests are negative.")
+                navigate_page(99)  # Ends the flow
             else:
-                st.session_state.page = 4
+                navigate_page(4)
 
-    if st.session_state.page == 4:
-        st.write("Consider alternative diagnosis (e.g. syphilis, chancroid). If risk factors for one of these diagnoses, administer empiric treatment.")
-        st.write("If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
+    elif st.session_state['page'] == 4:
+        st.info("Consider alternative diagnoses (e.g., syphilis, chancroid). Administer empiric treatment if risk factors are present.")
+        st.info("Evaluate further if initial therapy is ineffective or lab tests are negative.")
         if st.button('End'):
-            st.session_state.page = 99
+            navigate_page(99)
 
-    if st.session_state.page == 5:
+    elif st.session_state['page'] == 5:
         rapid_syphilis = st.radio(
-            "Is rapid Syphilis testing available?",
-            ('Yes', 'No'))
+            "Is rapid syphilis testing available?",
+            ('Yes', 'No'), key='rapid_syphilis')
         
         if st.button('Next'):
-            if rapid_syphilis == 'Yes':
-                st.session_state.page = 6
-            else:
-                st.session_state.page = 7
+            navigate_page(6 if rapid_syphilis == 'Yes' else 7)
 
-    if st.session_state.page == 6:
+    elif st.session_state['page'] == 6:
         syphilis_positive = st.radio(
-            "Is testing positive for Syphilis?",
-            ('Yes', 'No'))
+            "Is testing positive for syphilis?",
+            ('Yes', 'No'), key='syphilis_positive')
         
         if st.button('Next'):
             if syphilis_positive == 'Yes':
-                st.write("Treat for Syphilis.")
-                st.session_state.page = 99  # Ends the flow
+                st.info("Treat for syphilis.")
+                navigate_page(99)  # Ends the flow
             else:
-                st.session_state.page = 8
+                navigate_page(8)
 
-    if st.session_state.page == 7:
+    elif st.session_state['page'] == 7:
         high_risk_syphilis = st.radio(
-            "Is the patient at high risk for Syphilis?",
-            ('Yes', 'No'))
+            "Is the patient at high risk for syphilis?",
+            ('Yes', 'No'), key='high_risk_syphilis')
         
         if st.button('Next'):
             if high_risk_syphilis == 'Yes':
-                st.write("Treat empirically for Syphilis while awaiting more results.")
-                st.write("Further steps could include evaluation for LGV or other conditions based on additional risk factors.")
+                st.info("Treat empirically for syphilis while awaiting more results.")
+                st.info("Consider further evaluation for other conditions based on additional risk factors.")
             else:
-                st.write("If the initial lab tests are negative, further evaluation is needed, including evaluation for non-STI causes.")
-                st.session_state.page = 99  # Ends the flow
+                st.info("Evaluate further if initial lab tests are negative, including for non-STI causes.")
+                navigate_page(99)  # Ends the flow
 
-    if st.session_state.page == 8:
-        st.write("Further steps could include evaluation for LGV or other conditions based on additional risk factors.")
+    elif st.session_state['page'] == 8:
+        st.info("Consider further evaluation for LGV or other conditions based on additional risk factors.")
         if st.button('End'):
-            st.session_state.page = 99
+            navigate_page(99)
 
-    # Reset / End session handling
-    if st.session_state.page == 99:
+    # Handle reset and end of session
+    if st.session_state['page'] == 99:
+        st.markdown("---")
+        st.success("End of the decision flow. Click 'Reset' to start over.")
         if st.button('Reset'):
-            st.session_state.page = 1
+            navigate_page(1)
 
 if __name__ == "__main__":
-    decision_tree()
+    st.set_page_config(page_title="STI Management Decision Tree", layout='
