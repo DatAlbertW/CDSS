@@ -62,23 +62,23 @@ def decision_tree():
 
 # PAGE E
     elif st.session_state['page'] == 'E':
-    herpes_consistent = st.radio(
-        "Is the appearance consistent with Herpes simplex virus (HSV)?",
-        ('Yes', 'No'), key='herpes_consistent')
+        herpes_consistent = st.radio(
+            "Is the appearance consistent with Herpes simplex virus (HSV)?",
+            ('Yes', 'No'), key='herpes_consistent')
 
-    # Simple tooltip using Streamlit's built-in functionality
-    st.write("Click the info icon for more details on Herpes Ulcers.")
-    if st.button("ℹ️", key="info_button"):
-        st.info("""
-        **Clinical Appearance of Herpes Ulcers:**
-        - **PAINFUL:** Pain is a common symptom.
-        - **Grouped Vesicles:** These appear on an erythematous base.
-        - **Shallow Ulcerations:** Typical presentation.
-        - **Possible Large, Crusted Erosions:** Can occur in immunosuppressed patients.
-        """)
+        # Tooltip
+        st.write("Click the info icon for more details on Herpes Ulcers.")
+        if st.button("ℹ️", key="info_button"):
+            st.info("""
+            **Clinical Appearance of Herpes Ulcers:**
+            - **PAINFUL:** Pain is a common symptom.
+            - **Grouped Vesicles:** These appear on an erythematous base.
+            - **Shallow Ulcerations:** Typical presentation.
+            - **Possible Large, Crusted Erosions:** Can occur in immunosuppressed patients.
+            """)
 
-    if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
-        navigate_page('F' if herpes_consistent == 'Yes' else 'G')
+        if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
+            navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
 
 # PAGE F
