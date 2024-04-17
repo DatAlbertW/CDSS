@@ -53,18 +53,26 @@ def decision_tree():
 
     elif st.session_state['page'] == 'D':
         ulcer_painful = st.radio("Is the ulcer painful?", ('Yes', 'No'), key='ulcer_painful')
-        if st.button('Confirm Pain Status'):
+        if st.button('Confirm Pain Status', key='confirm_pain_status'):
             navigate_page('E' if ulcer_painful == 'Yes' else 'I')
 
     elif st.session_state['page'] == 'E':
         herpes_consistent = st.radio("Is the appearance consistent with Herpes simplex virus (HSV)?", ('Yes', 'No'), key='herpes_consistent')
-        if st.button('Confirm HSV Consistency'):
+        if st.button("Info on Clinical Appearance of Herpes Ulcers", key='herpes_info'):
+            st.info("Clinical Appearance of Herpes Ulcers: PAINFUL, Grouped vesicles on erythematous base, Shallow ulcerations. Possible large, crusted erosions in immunosuppressed patients.")
+        if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
             navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
     elif st.session_state['page'] == 'F':
-        st.info("Treat empirically for HSV.")
-        st.info("Evaluate further if initial therapy is ineffective or lab tests are negative.")
-        if st.button('Reset Decision Tree', on_click=reset_tree):
+        st.subheader("Recommended Treatments for Herpes")
+        st.table({
+            "Medication": ["Acyclovir", "Famciclovir", "Valacyclovir"],
+            "Dosage": ["400 mg three times daily", "250 mg three times daily", "1000 mg twice daily"],
+            "Duration": ["7-10 days for primary infection", "7-10 days for primary infection", "7-10 days for primary infection"],
+            "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
+        })
+        st.write("Options for recurrent disease include: Chronic suppression, Episodic therapy, or no intervention.")
+        if st.button('Reset Decision Tree', key='reset_in_f'):
             reset_tree()
 
     elif st.session_state['page'] == 'G':
@@ -93,7 +101,7 @@ def decision_tree():
             navigate_page('N' if lgv_risk == 'Yes' else 'O')
 
     # General reset button shown at each step for convenience
-    if st.session_state['page'] != 'intro':
+    if st.session_state['page'] != 'intro' and not st.session_state['page'] in ['C', 'F']:
         if st.button('Reset Decision Tree', key=f'reset_{st.session_state["page"]}'):
             reset_tree()
 
