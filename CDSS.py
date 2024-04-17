@@ -99,8 +99,8 @@ def decision_tree():
             </div>
             """, unsafe_allow_html=True)
 
-    if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
-        navigate_page('F' if herpes_consistent == 'Yes' else 'G')
+        if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
+            navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
 
 # PAGE F
