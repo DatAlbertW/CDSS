@@ -60,47 +60,25 @@ def decision_tree():
         if st.button('Confirm Pain Status', key='confirm_pain_status'):
             navigate_page('E' if ulcer_painful == 'Yes' else 'I')
 
-    # PAGE E
+# PAGE E
     elif st.session_state['page'] == 'E':
-        herpes_consistent = st.radio(
-            "Is the appearance consistent with Herpes simplex virus (HSV)?",
-            ('Yes', 'No'), key='herpes_consistent')
+    herpes_consistent = st.radio(
+        "Is the appearance consistent with Herpes simplex virus (HSV)?",
+        ('Yes', 'No'), key='herpes_consistent')
 
-        # Enhanced Tooltip
-        st.markdown("""
-            <style>
-                .tooltip-container {
-                    display: flex;
-                    align-items: center;
-                    gap: 10px;
-                    margin-top: 10px;
-                }
-                .info-icon {
-                    font-size: 24px; 
-                    cursor: pointer;
-                }
-                .tooltip-text {
-                    display: inline-block;
-                    background: #f9f9f9;
-                    border: 1px solid #ccc;
-                    padding: 10px;
-                    border-radius: 8px;
-                    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-                    cursor: help;
-                    font-size: 14px;
-                }
-            </style>
-            <div class="tooltip-container">
-                <span class="info-icon" title="Click for more info">ℹ️</span>
-                <div class="tooltip-text"
-                     title="Clinical Appearance of Herpes Ulcers:\n- PAINFUL\n- Grouped vesicles on an erythematous base\n- Shallow ulcerations\n- Possible large, crusted erosions in immunosuppressed patients.">
-                    Hover for info on Herpes Ulcers
-                </div>
-            </div>
-            """, unsafe_allow_html=True)
+    # Simple tooltip using Streamlit's built-in functionality
+    st.write("Click the info icon for more details on Herpes Ulcers.")
+    if st.button("ℹ️", key="info_button"):
+        st.info("""
+        **Clinical Appearance of Herpes Ulcers:**
+        - **PAINFUL:** Pain is a common symptom.
+        - **Grouped Vesicles:** These appear on an erythematous base.
+        - **Shallow Ulcerations:** Typical presentation.
+        - **Possible Large, Crusted Erosions:** Can occur in immunosuppressed patients.
+        """)
 
-        if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
-            navigate_page('F' if herpes_consistent == 'Yes' else 'G')
+    if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
+        navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
 
 # PAGE F
