@@ -12,6 +12,7 @@ def decision_tree():
 
     def navigate_page(page):
         st.session_state['page'] = page
+        st.experimental_rerun()  # Ensure the whole app is rerun when the page changes.
 
     # Function to reset the decision tree
     def reset_tree():
@@ -32,19 +33,19 @@ def decision_tree():
                 st.session_state['birth_date'] = birth_date
                 st.session_state['gender'] = gender
                 navigate_page('B')
+                st.write(f"Moving to page B from Intro, state: {st.session_state['page']}")  # Debug log
 
-    # Display questions based on the page number
     if st.session_state['page'] == 'B':
         st.subheader("Known Exposure")
         sti_exposure = st.radio(
             "Has the patient had a known exposure to an STI that causes genital ulcers in the last 90 days?",
             ('Yes', 'No'), key='sti_exposure')
-
         if st.button('Confirm Exposure', key='confirm_exposure_btn'):
             if sti_exposure == 'Yes':
                 navigate_page('C')
             else:
                 navigate_page('D')
+            st.write(f"Moving to page {'C' if sti_exposure == 'Yes' else 'D'}, state: {st.session_state['page']}")  # Debug log
 
     elif st.session_state['page'] == 'C':
         st.info("Initiate empiric treatment for that disease and await further testing.")
