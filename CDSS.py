@@ -57,24 +57,22 @@ def decision_tree():
         if st.button('Confirm Pain Status', key='confirm_pain_status'):
             navigate_page('E' if ulcer_painful == 'Yes' else 'I')
 
-elif st.session_state['page'] == 'E':
-    herpes_consistent = st.radio(
-        "Is the appearance consistent with Herpes simplex virus (HSV)?",
-        ('Yes', 'No'), key='herpes_consistent')
-
-    # Enhanced tooltip with emoji as an info icon
-    st.markdown("""
-        <div style="display: flex; align-items: center; gap: 10px;">
-            <span style="font-size: 20px; cursor: pointer;" title="Click for more info">ℹ️</span>
-            <div style="display: inline-block; cursor: help;"
-                title="Clinical Appearance of Herpes Ulcers:\n- PAINFUL\n- Grouped vesicles on an erythematous base\n- Shallow ulcerations\n- Possible large, crusted erosions in immunosuppressed patients.">
-                Hover for info on Herpes Ulcers
+    elif st.session_state['page'] == 'E':
+        herpes_consistent = st.radio(
+            "Is the appearance consistent with Herpes simplex virus (HSV)?",
+            ('Yes', 'No'), key='herpes_consistent')
+        # Enhanced tooltip with emoji as an info icon
+        st.markdown("""
+            <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 20px; cursor: pointer;" title="Click for more info">ℹ️</span>
+                <div style="display: inline-block; cursor: help;"
+                    title="Clinical Appearance of Herpes Ulcers:\n- PAINFUL\n- Grouped vesicles on an erythematous base\n- Shallow ulcerations\n- Possible large, crusted erosions in immunosuppressed patients.">
+                    Hover for info on Herpes Ulcers
+                </div>
             </div>
-        </div>
-        """, unsafe_allow_html=True)
-    
-    if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
-        navigate_page('F' if herpes_consistent == 'Yes' else 'G')
+            """, unsafe_allow_html=True)
+        if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
+            navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
     elif st.session_state['page'] == 'F':
         st.subheader("Recommended Treatments for Herpes")
