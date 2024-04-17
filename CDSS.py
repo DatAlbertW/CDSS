@@ -3,7 +3,7 @@ from datetime import datetime
 
 def decision_tree():
     st.title("Initial Evaluation of New Genital Ulcers in Sexually Active Patients")
-    st.caption("Follow the questions to guide the management of genital ulcers.")
+    st.caption("Follow the questionnaire to guide the management of genital ulcers.")
     st.markdown("---")
 
     # Initialize state management
