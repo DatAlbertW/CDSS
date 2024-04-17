@@ -101,4 +101,5 @@ def decision_tree():
             navigate_page(1)
 
 if __name__ == "__main__":
-    st.set_page_config(page_title="STI Management Decision Tree", layout='
+    st.set_page_config(page_title="STI Management Decision Tree", layout='wide')
+    decision_tree()
