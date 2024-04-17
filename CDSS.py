@@ -62,7 +62,7 @@ def decision_tree():
 
 # PAGE E
     elif st.session_state['page'] == 'E':
-    herpes_consistent = st.radio(
+        herpes_consistent = st.radio(
         "Is the appearance consistent with Herpes simplex virus (HSV)?",
         ('Yes', 'No'), key='herpes_consistent')
     # Enhanced Tooltip
