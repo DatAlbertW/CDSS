@@ -71,7 +71,7 @@ def decision_tree():
         if st.button("ℹ️", key="info_button"):
             st.info("""
             **Clinical Appearance of Herpes Ulcers:**
-            - **PAINFUL (common symptom).**
+            - **PAINFUL ULCERS (common symptom).**
             - **Grouped Vesicles:** These appear on an erythematous base.
             - **Shallow Ulcerations:** Typical presentation.
             - **Large, Crusted Erosions:** Can occur in immunosuppressed patients.
