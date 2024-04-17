@@ -22,9 +22,9 @@ def decision_tree():
     if st.session_state['page'] == 'intro':
         with st.form("patient_info"):
             st.subheader("Patient Demographics")
-            name = st.text_input("Name")
-            birth_date = st.date_input("Birth Date", min_value=datetime(1900, 1, 1), max_value=datetime.today())
-            gender = st.selectbox("Gender", ["Male", "Female", "Other"])
+            name = st.text_input("Name", key='name_input')
+            birth_date = st.date_input("Birth Date", min_value=datetime(1900, 1, 1), max_value=datetime.today(), key='birth_date_input')
+            gender = st.selectbox("Gender", ["Male", "Female", "Other"], key='gender_select')
             submit = st.form_submit_button("Submit")
 
             if submit:
@@ -40,7 +40,7 @@ def decision_tree():
             "Has the patient had a known exposure to an STI that causes genital ulcers in the last 90 days?",
             ('Yes', 'No'), key='sti_exposure')
 
-        if st.button('Confirm Exposure'):
+        if st.button('Confirm Exposure', key='confirm_exposure_btn'):
             if sti_exposure == 'Yes':
                 navigate_page('C')
             else:
@@ -48,7 +48,7 @@ def decision_tree():
 
     elif st.session_state['page'] == 'C':
         st.info("Initiate empiric treatment for that disease and await further testing.")
-        if st.button('Reset Decision Tree'):
+        if st.button('Reset Decision Tree', key='reset_in_c'):
             reset_tree()
 
     elif st.session_state['page'] == 'D':
@@ -92,9 +92,10 @@ def decision_tree():
         if st.button('Confirm LGV Risk'):
             navigate_page('N' if lgv_risk == 'Yes' else 'O')
 
-        # General reset button shown at each step for convenience
+    # General reset button shown at each step for convenience
     if st.session_state['page'] != 'intro':
-        st.button('Reset Decision Tree', on_click=reset_tree)
+        if st.button('Reset Decision Tree', key=f'reset_{st.session_state["page"]}'):
+            reset_tree()
 
 if __name__ == "__main__":
     st.set_page_config(page_title="STI Management Decision Tree", layout='wide')
