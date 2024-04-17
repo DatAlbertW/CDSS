@@ -35,6 +35,7 @@ def decision_tree():
                 navigate_page('B')
                 st.write(f"Moving to page B from Intro, state: {st.session_state['page']}")  # Debug log
 
+# PAGE B
     if st.session_state['page'] == 'B':
         st.subheader("Known Exposure")
         sti_exposure = st.radio(
@@ -47,33 +48,59 @@ def decision_tree():
                 navigate_page('D')
             st.write(f"Moving to page {'C' if sti_exposure == 'Yes' else 'D'}, state: {st.session_state['page']}")  # Debug log
 
+# PAGE C
     elif st.session_state['page'] == 'C':
         st.info("Initiate empiric treatment for that disease and await further testing.")
         if st.button('Reset Decision Tree', key='reset_in_c'):
             reset_tree()
 
+# PAGE D
     elif st.session_state['page'] == 'D':
         ulcer_painful = st.radio("Is the ulcer painful?", ('Yes', 'No'), key='ulcer_painful')
         if st.button('Confirm Pain Status', key='confirm_pain_status'):
             navigate_page('E' if ulcer_painful == 'Yes' else 'I')
 
+# PAGE E
     elif st.session_state['page'] == 'E':
-        herpes_consistent = st.radio(
-            "Is the appearance consistent with Herpes simplex virus (HSV)?",
-            ('Yes', 'No'), key='herpes_consistent')
-        # Enhanced tooltip with emoji as an info icon
-        st.markdown("""
-            <div style="display: flex; align-items: center; gap: 10px;">
-                <span style="font-size: 20px; cursor: pointer;" title="Click for more info">ℹ️</span>
-                <div style="display: inline-block; cursor: help;"
-                    title="Clinical Appearance of Herpes Ulcers:\n- PAINFUL\n- Grouped vesicles on an erythematous base\n- Shallow ulcerations\n- Possible large, crusted erosions in immunosuppressed patients.">
-                    Hover for info on Herpes Ulcers
-                </div>
+    herpes_consistent = st.radio(
+        "Is the appearance consistent with Herpes simplex virus (HSV)?",
+        ('Yes', 'No'), key='herpes_consistent')
+    # Enhanced Tooltip
+    st.markdown("""
+        <style>
+            .tooltip-container {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-top: 10px;
+            }
+            .info-icon {
+                font-size: 24px; 
+                cursor: pointer;
+            }
+            .tooltip-text {
+                display: inline-block;
+                background: #f9f9f9;
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 8px;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                cursor: help;
+                font-size: 14px;
+            }
+        </style>
+        <div class="tooltip-container">
+            <span class="info-icon" title="Click for more info">ℹ️</span>
+            <div class="tooltip-text"
+                 title="Clinical Appearance of Herpes Ulcers:\n- PAINFUL\n- Grouped vesicles on an erythematous base\n- Shallow ulcerations\n- Possible large, crusted erosions in immunosuppressed patients.">
+                Hover for info on Herpes Ulcers
             </div>
-            """, unsafe_allow_html=True)
-        if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
-            navigate_page('F' if herpes_consistent == 'Yes' else 'G')
+        </div>
+        """, unsafe_allow_html=True)
+    if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
+        navigate_page('F' if herpes_consistent == 'Yes' else 'G')
 
+# PAGE F
     elif st.session_state['page'] == 'F':
         st.subheader("Recommended Treatment Options for Herpes")
         st.table({
@@ -83,37 +110,41 @@ def decision_tree():
             "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
         })
         st.write("Options for recurrent disease include: Chronic suppression, Episodic therapy, or no intervention.")
-        if st.button('Click if Treatment Fails or Initial Tests are Negative'):
+        if st.button('Click here for Additional Innformation'):
             navigate_page('H')
 
+# PAGE G
     elif st.session_state['page'] == 'G':
         st.info("Consider alternative diagnosis (e.g., syphilis, chancroid). Administer empiric treatment if risk factors are present.")
-        if st.button('Click if Treatment Fails or Initial Tests are Negative'):
+        if st.button('Click here for Additional Innformation'):
             navigate_page('H')
 
-
+# PAGE H
     elif st.session_state['page'] == 'H':
         st.subheader("Further Evaluation")
         st.write("If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
         if st.button('Reset Decision Tree'):
             reset_tree()
     
-
+# PAGE I
     elif st.session_state['page'] == 'I':
         rapid_syphilis = st.radio("Is rapid syphilis testing available?", ('Yes', 'No'), key='rapid_syphilis')
         if st.button('Confirm Rapid Test Availability'):
             navigate_page('J' if rapid_syphilis == 'Yes' else 'K')
 
+# PAGE J
     elif st.session_state['page'] == 'J':
         syphilis_positive = st.radio("Is testing positive for syphilis?", ('Yes', 'No'), key='syphilis_positive')
         if st.button('Confirm Syphilis Test Result'):
             navigate_page('L' if syphilis_positive == 'Yes' else 'M')
 
+# PAGE K
     elif st.session_state['page'] == 'K':
         high_risk_syphilis = st.radio("Is the patient at high risk for syphilis?", ('Yes', 'No'), key='high_risk_syphilis')
         if st.button('Confirm High Risk Status'):
             navigate_page('P' if high_risk_syphilis == 'Yes' else 'Q')
 
+# PAGE M
     elif st.session_state['page'] == 'M':
         lgv_risk = st.radio("Has patient or sexual partner lived or traveled to an LGV-endemic area OR does patient have painful lymphadenopathy present?", ('Yes', 'No'), key='lgv_risk')
         if st.button('Confirm LGV Risk'):
