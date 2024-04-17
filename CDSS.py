@@ -22,7 +22,7 @@ def decision_tree():
     # Introduction page for demographics
     if st.session_state['page'] == 'intro':
         with st.form("patient_info"):
-            st.subheader("Patient Demographics")
+            st.subheader("Patient Details")
             name = st.text_input("Name", key='name_input')
             birth_date = st.date_input("Birth Date", min_value=datetime(1900, 1, 1), max_value=datetime.today(), key='birth_date_input')
             gender = st.selectbox("Gender", ["Male", "Female", "Other"], key='gender_select')
