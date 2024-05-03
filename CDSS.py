@@ -76,6 +76,10 @@ def decision_tree():
             - **Shallow Ulcerations:** Typical presentation.
             - **Large, Crusted Erosions:** Can occur in immunosuppressed patients.
             """)
+            # Herpes Image
+            st.write("""
+            <img src="images/herpes.jpeg" alt="Herpes Image" style="width: 300px; height: auto;"/>
+            """)
 
         if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
             navigate_page('F' if herpes_consistent == 'Yes' else 'G')
