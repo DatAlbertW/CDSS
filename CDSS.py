@@ -77,9 +77,8 @@ def decision_tree():
             - **Large, Crusted Erosions:** Can occur in immunosuppressed patients.
             """)
             # Herpes Image
-            st.image("""
-            <img src="images/herpes.jpeg" alt="Herpes Image" style="width: 300px; height: auto;"/>
-            """)
+            st.image("
+            images/herpes.jpeg", caption="Herpes Image", width=300)
 
         if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
             navigate_page('F' if herpes_consistent == 'Yes' else 'G')
