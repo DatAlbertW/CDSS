@@ -78,7 +78,7 @@ def decision_tree():
             """)
             # Herpes Image
             st.write("""
-            <img src="images/herpes.jpeg" alt="Herpes Image" style="width: 300px; height: auto;"/>
+            <img src="https://github.com/DatAlbertW/CDSS/blob/main/images/herpes.jpeg" alt="Herpes Image" style="width: 300px; height: auto;"/>
             """)
 
         if st.button('Confirm HSV Consistency', key='confirm_hsv_consistency'):
