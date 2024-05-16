@@ -8,6 +8,9 @@ Clinical Decision Support System
 4. Janick Marti
 
 
+# CDSS
+Clinical Decision Support System
+
 <table>
   <thead>
     <tr>
@@ -23,8 +26,8 @@ Clinical Decision Support System
       <td><span style="font-size:0.5em;"></span></td>
     </tr>
     <tr>
-      <span style="font-size:0.5em;">1. Justification for Guidelines / Evidence (describe rationale for selection)</span>
-      <td><span style="font-size:0.5em;"></span></td>
+      <td><span style="font-size:0.5em;">1. Justification for Guidelines / Evidence (describe rationale for selection)</span></td>
+      <td><span style="font-size:0.5em;"></td>
       <td><span style="font-size:0.5em;"></span></td>
     </tr>
     <tr>
@@ -114,4 +117,5 @@ Clinical Decision Support System
     </tr>
   </tbody>
 </table>
+
 
