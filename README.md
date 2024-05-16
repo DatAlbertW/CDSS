@@ -7,9 +7,7 @@ Clinical Decision Support System
 3. Erzhena Batorova
 4. Janick Marti
 
-
-# CDSS
-Clinical Decision Support System
+# Task Overview
 
 <table>
   <thead>
