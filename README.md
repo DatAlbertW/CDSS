@@ -3,8 +3,8 @@ Clinical Decision Support System
 
 
 <table>
-  <thead style="background-color:#1E3A8A; color:white;">
-    <tr>
+  <thead>
+    <tr style="background-color:#1E3A8A; color:white;">
       <th>TASK</th>
       <th>DELIVERED BY</th>
       <th>STATUS</th>
@@ -108,4 +108,5 @@ Clinical Decision Support System
     </tr>
   </tbody>
 </table>
+
 
