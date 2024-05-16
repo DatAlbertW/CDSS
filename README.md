@@ -2,8 +2,9 @@
 Clinical Decision Support Systems
 
 # Introduction
-**Project focus:** Perform screening for sexually transmitted infections (L2), emphazising on the approach to patients with genital ulcers (L3).
-**Project goals:** Assist healthcare providers with evidence-based guidelines to guide their decisions and improve patient outcomes.
+- **Project focus:** Perform screening for sexually transmitted infections (L2), emphazising on the approach to patients with genital ulcers (L3).
+
+- **Project goals:** Assist healthcare providers with evidence-based guidelines to guide their decisions and improve patient outcomes.
 
 # Argument
 Sexually Transmitted Infections (STIs) are a significant public health concern. In some cases, STIs are asymptomatic and can lead to complications like infertility, chronic pelvic pain, upper urinary tract infections, cervical cancer, and chronic infection (Hepatitis and HIV). Screening is vital to identify, test, and treat patients and partners before any complication emerges and prevent transmission and reinfection.
