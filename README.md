@@ -2,8 +2,8 @@
 Clinical Decision Support Systems
 
 # Introduction
-**- Project focus:** Perform screening for sexually transmitted infections (L2), emphazising on the approach to patients with genital ulcers (L3).
-**- Project goals:** Assist healthcare providers with evidence-based guidelines to guide their decisions and improve patient outcomes.
+**Project focus:** Perform screening for sexually transmitted infections (L2), emphazising on the approach to patients with genital ulcers (L3).
+**Project goals:** Assist healthcare providers with evidence-based guidelines to guide their decisions and improve patient outcomes.
 
 
 
