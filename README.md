@@ -1,5 +1,11 @@
 # CDSS
-Clinical Decision Support System
+Clinical Decision Support Systems
+
+# Introduction
+**- Project focus:** Perform screening for sexually transmitted infections (L2), emphazising on the approach to patients with genital ulcers (L3).
+**- Project goals:** Assist healthcare providers with evidence-based guidelines to guide their decisions and improve patient outcomes.
+
+
 
 # Group 7 (Members):
 1. Alberto Wicker Vera
