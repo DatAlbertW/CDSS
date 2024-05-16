@@ -20,8 +20,8 @@ Sexually Transmitted Infections (STIs) are a significant public health concern. 
 | **TASK** | **DELIVERED BY** | **STATUS** |
 |----------|------------------|------------|
 | **L1** | | |
-| 1. Justification for Guidelines / Evidence (describe rationale for selection) | | |
-| 2. Statement About the Healthcare Need (describe rationale for the problem to address) | | |
+| 1. Justification for Guidelines / Evidence (describe rationale for selection) | Alberto Wicker | |
+| 2. Statement About the Healthcare Need (describe rationale for the problem to address) | Alberto Wicker | |
 | 3. User Personas and Scenarios (Describe different users that will interact with the CDSS and provide 2 user scenarios on how the user will interact) | | |
 | **L2** | | |
 | 1. BPMN (high level workflow) | Alberto Wicker | |
