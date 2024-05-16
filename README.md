@@ -7,7 +7,7 @@ Clinical Decision Support System
 3. Erzhena Batorova
 4. Janick Marti
 
-# Task Overview
+# Tasks Overview
 
 <table>
   <thead>
