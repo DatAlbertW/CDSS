@@ -23,7 +23,7 @@ Clinical Decision Support System
       <td><span style="font-size:0.5em;"></span></td>
     </tr>
     <tr>
-      <td><span style="font-size:0.5em;">1. Justification for Guidelines / Evidence (describe rationale for selection)</span></td>
+      <td><span style="font-size:0.1em;">1. Justification for Guidelines / Evidence (describe rationale for selection)</span></td>
       <td><span style="font-size:0.5em;"></span></td>
       <td><span style="font-size:0.5em;"></span></td>
     </tr>
