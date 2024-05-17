@@ -32,7 +32,7 @@ Sexually Transmitted Infections (STIs) are a significant public health concern. 
 | **L3** | | |
 | 1. Machine readable Code: any standard can be used as long it drives the L4 behaviour. Hard coded application will be accepted. (Consider UX (e.g. sequence and grouping of your questions) and maintainability of the code and data quality (e.g. constrain rules).) | Alberto Wicker, Jannick | |
 | **L4** | | |
-| 1. Executable CDSS: Think about user interface considerations – what will make the system more or less acceptable and usable to end-users. | Alberto Wicker | |
+| 1. Executable CDSS: Think about user interface considerations – what will make the system more or less acceptable and usable to end-users. | Janick, Erz | |
 | **QUALITY ASSURANCE TESTING:** | | |
 | 1. Design a risk-based testing approach, conduct tests to identify L2-L4 translation issues, and address any bugs or issues found. | Janick | |
 | **IDENTIFICATION, MONITORING AND EVALUATION STRATEGY:** | | |
