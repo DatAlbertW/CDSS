@@ -1,8 +1,11 @@
 import streamlit as st
 from datetime import datetime
 
-st.title("Initial Evaluation of New Genital Ulcers in Sexually Active Patients")
-st.caption("Follow the questionnaire to guide the management of genital ulcers.")
+# Set page configuration
+st.set_page_config(page_title="Genital Ulcer Management", layout='wide')
+
+st.title("Genital Ulcer Management in Sexually Active Patients")
+st.caption("Follow the steps to diagnose and manage genital ulcers effectively.")
 st.markdown("---")
 
 # Initialize state management
@@ -116,7 +119,7 @@ if st.session_state.get('step') == 'syphilis_result':
 # Syphilis treatment step
 if st.session_state.get('step') == 'syphilis_treatment':
     st.subheader("Syphilis Treatment")
-    st.write("Initiate treatment for syphilis based on current guidelines.")
+    st.write("Initiate treatment for syphilis based on current guidelines: a single dose of penicillin G benzathine (2.4 million units IM).")
     if st.button('Reset'):
         reset_tree()
 
@@ -130,7 +133,7 @@ if st.session_state.get('step') == 'lgv_risk':
 if st.session_state.get('step') == 'lgv_treatment':
     st.subheader("Lymphogranuloma Venereum (LGV) Testing and Treatment")
     st.write("Testing for LGV is recommended. Administer empiric treatment while awaiting results.")
-    st.write("If the initial tests are negative and/or there is no response to therapy, further evaluation is needed, including evaluation for non-STI causes.")
+    st.write("Preferred treatment: Doxycycline 100 mg orally twice daily for 21 days.")
     if st.button('Reset'):
         reset_tree()
 
@@ -150,16 +153,31 @@ if st.session_state.get('step') == 'high_risk_syphilis':
 # Empiric syphilis treatment step
 if st.session_state.get('step') == 'empiric_syphilis_treatment':
     st.subheader("Empiric Treatment for Syphilis")
-    st.write("Treat empirically for syphilis while awaiting further results.")
+    st.write("Treat empirically for syphilis while awaiting further results: a single dose of penicillin G benzathine (2.4 million units IM).")
     if st.button('Next'):
         navigate_step('lgv_risk')
+
+# Step for chancroid treatment
+if st.session_state.get('step') == 'chancroid_treatment':
+    st.subheader("Chancroid Treatment")
+    st.write("Empiric single-dose therapy with either azithromycin (1 gram orally) or ceftriaxone (250 mg IM).")
+    if st.button('Reset'):
+        reset_tree()
+
+# Step for granuloma inguinale treatment
+if st.session_state.get('step') == 'granuloma_inguale_treatment':
+    st.subheader("Granuloma Inguinale (Donovanosis) Treatment")
+    st.write("Azithromycin (1 g once weekly, or 500 mg daily) for a minimum of three weeks or until all lesions have completely healed.")
+    st.write("Alternative agents: Doxycycline, Erythromycin, or Trimethoprim-sulfamethoxazole for the same duration.")
+    if st.button('Reset'):
+        reset_tree()
 
 # General reset button shown at each step for convenience
 if st.session_state.get('step') != 'intro':
     if st.button('Reset Decision Tree'):
         reset_tree()
 
+# Ensure that the main function is called
 if __name__ == "__main__":
-    st.set_page_config(page_title="STI Management Decision Tree", layout='wide')
-    decision_tree()
+    reset_tree()
 
