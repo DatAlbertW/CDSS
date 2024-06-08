@@ -120,7 +120,7 @@ if st.session_state.get('step') == 'syphilis_result':
 if st.session_state.get('step') == 'syphilis_treatment':
     st.subheader("Syphilis Treatment")
     st.write("Initiate treatment for syphilis based on current guidelines: a single dose of penicillin G benzathine (2.4 million units IM).")
-    if st.button('Reset'):
+    if st.button('Next'):
         reset_tree()
 
 # Step for LGV risk assessment
@@ -134,14 +134,14 @@ if st.session_state.get('step') == 'lgv_treatment':
     st.subheader("Lymphogranuloma Venereum (LGV) Testing and Treatment")
     st.write("Testing for LGV is recommended. Administer empiric treatment while awaiting results.")
     st.write("Preferred treatment: Doxycycline 100 mg orally twice daily for 21 days.")
-    if st.button('Reset'):
+    if st.button('Next'):
         reset_tree()
 
 # Non-STI evaluation step
 if st.session_state.get('step') == 'non_sti_evaluation':
     st.subheader("Further Evaluation for Non-STI Causes")
     st.write("If the initial tests are negative, further evaluation is needed, including evaluation for non-STI causes.")
-    if st.button('Reset'):
+    if st.button('Next'):
         reset_tree()
 
 # Step for high risk syphilis assessment
@@ -161,7 +161,7 @@ if st.session_state.get('step') == 'empiric_syphilis_treatment':
 if st.session_state.get('step') == 'chancroid_treatment':
     st.subheader("Chancroid Treatment")
     st.write("Empiric single-dose therapy with either azithromycin (1 gram orally) or ceftriaxone (250 mg IM).")
-    if st.button('Reset'):
+    if st.button('Next'):
         reset_tree()
 
 # Step for granuloma inguinale treatment
@@ -169,7 +169,7 @@ if st.session_state.get('step') == 'granuloma_inguale_treatment':
     st.subheader("Granuloma Inguinale (Donovanosis) Treatment")
     st.write("Azithromycin (1 g once weekly, or 500 mg daily) for a minimum of three weeks or until all lesions have completely healed.")
     st.write("Alternative agents: Doxycycline, Erythromycin, or Trimethoprim-sulfamethoxazole for the same duration.")
-    if st.button('Reset'):
+    if st.button('Next'):
         reset_tree()
 
 # General reset button shown at each step for convenience
@@ -179,5 +179,6 @@ if st.session_state.get('step') != 'intro':
 
 # Ensure that the main function is called
 if __name__ == "__main__":
-    reset_tree()
+    navigate_step(st.session_state['step'])
+
 
