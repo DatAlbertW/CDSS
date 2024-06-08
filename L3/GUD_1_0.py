@@ -17,9 +17,9 @@ def navigate_step(step):
 
 def reset_tree():
     st.session_state['step'] = 'intro'
-    for key in list(st.session_state.keys()):
-        if key != 'step':
-            del st.session_state[key]
+    keys_to_delete = [key for key in st.session_state.keys() if key != 'step']
+    for key in keys_to_delete:
+        del st.session_state[key]
 
 # Introduction page for demographics
 if st.session_state['step'] == 'intro':
@@ -179,6 +179,7 @@ if st.session_state.get('step') != 'intro':
 
 # Ensure that the main function is called
 if __name__ == "__main__":
-    navigate_step(st.session_state['step'])
+    st.session_state['step'] = st.session_state.get('step', 'intro')
+
 
 
