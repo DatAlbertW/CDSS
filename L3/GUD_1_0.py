@@ -21,7 +21,7 @@ def main():
     # Step A
     if st.session_state.step == "A":
         st.header("A) Known Exposure to STI causing Genital Ulcers?")
-        exposure = st.radio("Has the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("", "Yes", "No"))
+        exposure = st.radio("Has the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("", "Yes", "No"), key="step_a")
 
         if exposure == "Yes":
             st.session_state.step = "B"
@@ -31,12 +31,12 @@ def main():
     # Step B
     if st.session_state.step == "B":
         st.header("B) Select the STI the patient has been exposed to")
-        stis = st.multiselect("Select the STI", ["Herpes (HSV-1, HSV-2)", "Syphilis (Treponema pallidum)", "Lymphogranuloma venereum (Chlamydia trachomatis)", "Chancroid (Haemophilus ducreyi)", "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis"])
+        stis = st.multiselect("Select the STI", ["Herpes (HSV-1, HSV-2)", "Syphilis (Treponema pallidum)", "Lymphogranuloma venereum (Chlamydia trachomatis)", "Chancroid (Haemophilus ducreyi)", "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis"], key="step_b")
         
         if stis:
             st.session_state.step = "D"
         
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_b")
     
     # Step D
     if st.session_state.step == "D":
@@ -100,7 +100,7 @@ def main():
         - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
         """)
         
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_d")
 
     # Step E
     if st.session_state.step == "E":
@@ -111,26 +111,26 @@ def main():
             "Test": ["Swab the lesion directly and perform Polymerase Chain Reaction (PCR) test. If PCR is not available, perform a viral culture.", "Perform Treponemal tests (TPHA or Rapid Serologic test)"]
         })
         st.session_state.step = "F"
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_e")
 
     # Step F
     if st.session_state.step == "F":
         st.header("F) Is the ulcer painful?")
-        ulcer_painful = st.radio("Is the ulcer painful?", ("Yes", "No"))
+        ulcer_painful = st.radio("Is the ulcer painful?", ("Yes", "No"), key="step_f")
 
         if ulcer_painful == "Yes":
             st.session_state.step = "G"
         elif ulcer_painful == "No":
             st.session_state.step = "K"
 
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_f")
 
     # Step G
     if st.session_state.step == "G":
         st.header("G) Appearance Consistent with Herpes?")
-        herpes_appearance = st.radio("Is the appearance consistent with Herpes (Herpes Simplex Virus 1 and 2)?", ("Yes", "No"))
+        herpes_appearance = st.radio("Is the appearance consistent with Herpes (Herpes Simplex Virus 1 and 2)?", ("Yes", "No"), key="step_g")
         st.write("Click the info icon for more details on Herpes Ulcers.")
-        if st.button("ℹ️", key="info_button"):
+        if st.button("ℹ️", key="info_button_herpes"):
             st.info("""
             **Clinical Appearance of Herpes Ulcers (HSV-1 and HSV-2):**
             - PAINFUL ULCERS (common symptom).
@@ -146,7 +146,7 @@ def main():
         else:
             st.session_state.step = "I"
 
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_g")
 
     # Step H
     if st.session_state.step == "H":
@@ -160,14 +160,14 @@ def main():
             "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
         })
         st.session_state.step = "J"
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_h")
 
     # Step I
     if st.session_state.step == "I":
         st.header("I) Consider Alternative Diagnosis")
         st.write("Consider alternative diagnosis (e.g. syphilis, chancroid). If risk factors for one of these diagnoses, perform diagnostic Tests and administer empiric treatment.")
         st.session_state.step = "J"
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_i")
 
     # Step J
     if st.session_state.step == "J":
@@ -180,36 +180,36 @@ def main():
         - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
         - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
         """)
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_j")
 
     # Step K
     if st.session_state.step == "K":
         st.header("K) Rapid Syphilis Testing Availability")
-        rapid_syphilis = st.radio("Is rapid Syphilis testing available? (e.g. TPHA, Rapid Serologic Test)?", ("Yes", "No"))
+        rapid_syphilis = st.radio("Is rapid Syphilis testing available? (e.g. TPHA, Rapid Serologic Test)?", ("Yes", "No"), key="step_k")
 
         if rapid_syphilis == "Yes":
             st.session_state.step = "L"
         elif rapid_syphilis == "No":
             st.session_state.step = "M"
 
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_k")
 
     # Step L
     if st.session_state.step == "L":
         st.header("L) Syphilis Testing Result")
-        syphilis_result = st.radio("Is testing positive for Syphilis?", ("Yes", "No"))
+        syphilis_result = st.radio("Is testing positive for Syphilis?", ("Yes", "No"), key="step_l")
 
         if syphilis_result == "Yes":
             st.session_state.step = "N"
         else:
             st.session_state.step = "O"
 
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_l")
 
     # Step M
     if st.session_state.step == "M":
         st.header("M) Patient Risk Factors for Syphilis")
-        patient_risk = st.multiselect("Is the patient at high risk for Syphilis (Treponema Pallidum):", ["Man who haves sex with other men", "Patient engages in commercial sex work", "Exchange sex for drugs", "Unlikely to return for follow-up", "Unlikely to abstain from sexual contact until the diagnosis testing is completed"])
+        patient_risk = st.multiselect("Is the patient at high risk for Syphilis (Treponema Pallidum):", ["Man who haves sex with other men", "Patient engages in commercial sex work", "Exchange sex for drugs", "Unlikely to return for follow-up", "Unlikely to abstain from sexual contact until the diagnosis testing is completed"], key="step_m")
         
         st.write("Click the info icon for more details on Primary Syphilis Ulcers.")
         if st.button("ℹ️", key="info_syphilis"):
@@ -228,7 +228,7 @@ def main():
         else:
             st.session_state.step = "S"
 
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_m")
 
     # Step N
     if st.session_state.step == "N":
@@ -247,12 +247,12 @@ def main():
         - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
         - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
         """)
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_n")
 
     # Step O
     if st.session_state.step == "O":
         st.header("O) High Risk Factors for Lymphogranuloma Venereum")
-        high_risk = st.multiselect("Has the patient or sexual partner lived or traveled to a Lymphogranuloma venereum endemic area? AND/OR Does the patient have painful or significant lymphadenopathy present? AND/OR Is the patient HIV positive male and has sex with other men?", ["Yes"])
+        high_risk = st.multiselect("Has the patient or sexual partner lived or traveled to a Lymphogranuloma venereum endemic area? AND/OR Does the patient have painful or significant lymphadenopathy present? AND/OR Is the patient HIV positive male and has sex with other men?", ["Yes"], key="step_o")
         
         st.write("Click the info icon for more details on Lymphogranuloma Venereum Ulcers.")
         if st.button("ℹ️", key="info_chlamydia"):
@@ -270,7 +270,7 @@ def main():
         else:
             st.session_state.step = "Q"
 
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_o")
 
     # Step P
     if st.session_state.step == "P":
@@ -283,7 +283,7 @@ def main():
             "Notes": ["Primary infection treatment"]
         })
         st.write("Await for Test results. If the initial Laboratory tests are negative and/or the patient did not respond to therapy, further evaluation is needed, including evaluation for non-STI causes.")
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_p")
 
     # Step Q
     if st.session_state.step == "Q":
@@ -296,7 +296,7 @@ def main():
         - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
         - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
         """)
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_q")
 
     # Step R
     if st.session_state.step == "R":
@@ -309,7 +309,7 @@ def main():
             "Notes": ["Primary infection treatment", "", "Primary infection treatment", "Primary infection treatment"]
         })
         st.session_state.step = "O"
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_r")
 
     # Step S
     if st.session_state.step == "S":
@@ -322,11 +322,12 @@ def main():
         - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
         - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
         """)
-        st.button("Back", on_click=go_back)
+        st.button("Back", on_click=go_back, key="back_s")
 
-    st.button("Reset", on_click=reset)
+    st.button("Reset", on_click=reset, key="reset")
 
 if __name__ == "__main__":
     main()
+
 
 
