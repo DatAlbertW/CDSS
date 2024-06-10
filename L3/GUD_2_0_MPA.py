@@ -1,5 +1,11 @@
 import streamlit as st
 
+# Reset function to clear session state
+def reset():
+    st.session_state.clear()
+    st.session_state.step = "A"
+    st.experimental_rerun()
+
 # Define the steps as separate functions
 def step_a():
     st.header("A) Known Exposure to STI causing Genital Ulcers?")
@@ -393,3 +399,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
