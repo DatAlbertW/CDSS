@@ -4,19 +4,26 @@ import streamlit as st
 def reset():
     st.session_state.clear()
     st.session_state.step = "A"
-    st.experimental_rerun()
+    st.rerun()
+
+# Helper function to format the exposure text adaptively
+def format_exposure_text(stis):
+    if len(stis) == 1:
+        return f"The patient has been exposed to {stis[0]}, therefore the following empirical treatment is recommended:"
+    else:
+        return f"The patient has been exposed to {', '.join(stis[:-1])} and {stis[-1]}, therefore the following empirical treatment is recommended:"
 
 # Define the steps as separate functions
 def step_a():
     st.header("A) Known Exposure to STI causing Genital Ulcers?")
-    exposure = st.radio("Please confirm if the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("", "Yes", "No"), key="step_a")
+    exposure = st.radio("Has the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("", "Yes", "No"), key="step_a")
 
     if exposure == "Yes":
         st.session_state.step = "B"
-        st.experimental_rerun()
+        st.rerun()
     elif exposure == "No":
         st.session_state.step = "D"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_b():
     st.header("B) Select the STI the patient has been exposed to")
@@ -25,16 +32,16 @@ def step_b():
     if stis:
         st.session_state.stis = stis
         st.session_state.step = "C"
-        st.experimental_rerun()
+        st.rerun()
     
     if st.button("Back"):
         st.session_state.step = "A"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_c():
     stis = st.session_state.get("stis", [])
     st.header("C) Initiate Empiric Treatment")
-    st.write(f"The patient has been exposed to {', '.join(stis)}, therefore the following empirical treatment is recommended:")
+    st.write(format_exposure_text(stis))
 
     if "Herpes (HSV-1, HSV-2)" in stis:
         st.subheader("Initial diagnostic tests and empiric treatment regimens for Herpes (HSV-1 and HSV-2):")
@@ -96,7 +103,7 @@ def step_c():
     
     if st.button("Back"):
         st.session_state.step = "B"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_d():
     st.header("D) Test Recommendation for New Genital Ulcer")
@@ -106,11 +113,11 @@ def step_d():
         "Test": ["Swab the lesion directly and perform Polymerase Chain Reaction (PCR) test. If PCR is not available, perform a viral culture.", "Perform Treponemal tests (TPHA or Rapid Serologic test)"]
     })
     st.session_state.step = "E"
-    st.experimental_rerun()
+    st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "A"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_e():
     st.header("E) Is the ulcer painful?")
@@ -118,14 +125,14 @@ def step_e():
 
     if ulcer_painful == "Yes":
         st.session_state.step = "F"
-        st.experimental_rerun()
+        st.rerun()
     elif ulcer_painful == "No":
         st.session_state.step = "I"
-        st.experimental_rerun()
+        st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "D"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_f():
     st.header("F) Appearance Consistent with Herpes?")
@@ -144,14 +151,14 @@ def step_f():
     
     if herpes_appearance == "Yes":
         st.session_state.step = "G"
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.session_state.step = "H"
-        st.experimental_rerun()
+        st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "E"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_g():
     st.header("G) Test and Empirical Treatment for Herpes")
@@ -164,11 +171,11 @@ def step_g():
         "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
     })
     st.session_state.step = "H"
-    st.experimental_rerun()
+    st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "F"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_h():
     st.header("H) Further Evaluation")
@@ -183,7 +190,7 @@ def step_h():
 
     if st.button("Back"):
         st.session_state.step = "G"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_i():
     st.header("I) Rapid Syphilis Testing Availability")
@@ -191,14 +198,14 @@ def step_i():
 
     if rapid_syphilis == "Yes":
         st.session_state.step = "J"
-        st.experimental_rerun()
+        st.rerun()
     elif rapid_syphilis == "No":
         st.session_state.step = "K"
-        st.experimental_rerun()
+        st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "E"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_j():
     st.header("J) Syphilis Testing Result")
@@ -206,14 +213,14 @@ def step_j():
 
     if syphilis_result == "Yes":
         st.session_state.step = "L"
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.session_state.step = "M"
-        st.experimental_rerun()
+        st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "I"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_k():
     st.header("K) Patient Risk Factors for Syphilis")
@@ -233,14 +240,14 @@ def step_k():
 
     if patient_risk:
         st.session_state.step = "P"
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.session_state.step = "Q"
-        st.experimental_rerun()
+        st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "I"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_l():
     st.header("L) Treat for Primary Syphilis")
@@ -261,7 +268,7 @@ def step_l():
 
     if st.button("Back"):
         st.session_state.step = "J"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_m():
     st.header("M) High Risk Factors for Lymphogranuloma Venereum")
@@ -280,14 +287,14 @@ def step_m():
 
     if high_risk:
         st.session_state.step = "N"
-        st.experimental_rerun()
+        st.rerun()
     else:
         st.session_state.step = "O"
-        st.experimental_rerun()
+        st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "J"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_n():
     st.header("N) Perform NAAT for Lymphogranuloma venereum and Treat Empirically")
@@ -302,7 +309,7 @@ def step_n():
 
     if st.button("Back"):
         st.session_state.step = "M"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_o():
     st.header("O) Await Test Results")
@@ -317,7 +324,7 @@ def step_o():
 
     if st.button("Back"):
         st.session_state.step = "N"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_p():
     st.header("P) Treat Empirically for Primary Syphilis")
@@ -329,11 +336,11 @@ def step_p():
         "Notes": ["Primary infection treatment", "", "Primary infection treatment", "Primary infection treatment"]
     })
     st.session_state.step = "O"
-    st.experimental_rerun()
+    st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "K"
-        st.experimental_rerun()
+        st.rerun()
 
 def step_q():
     st.header("Q) Further Evaluation")
@@ -348,7 +355,7 @@ def step_q():
 
     if st.button("Back"):
         st.session_state.step = "K"
-        st.experimental_rerun()
+        st.rerun()
 
 # Main function to control the flow
 def main():
@@ -399,4 +406,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
