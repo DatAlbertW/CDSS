@@ -13,7 +13,7 @@ def main():
 
     # Navigation Buttons
     def go_back():
-        step_order = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
+        step_order = ["A", "B", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
         current_index = step_order.index(st.session_state.step)
         if current_index > 0:
             st.session_state.step = step_order[current_index - 1]
@@ -34,25 +34,19 @@ def main():
         stis = st.multiselect("Select the STI", ["Herpes (HSV-1, HSV-2)", "Syphilis (Treponema pallidum)", "Lymphogranuloma venereum (Chlamydia trachomatis)", "Chancroid (Haemophilus ducreyi)", "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis"])
         
         if stis:
-            st.session_state.step = "C"
+            st.session_state.step = "D"
         
         st.button("Back", on_click=go_back)
     
-    # Step C
-    if st.session_state.step == "C":
-        st.header("C) Test Recommendation")
-        st.write(f"Test for {', '.join(stis)} if available")
-        st.session_state.step = "D"
-        st.button("Back", on_click=go_back)
-
     # Step D
     if st.session_state.step == "D":
         st.header("D) Initiate Empiric Treatment")
         st.write(f"The patient has been exposed to {', '.join(stis)}, therefore the following empirical treatment is recommended:")
 
         if "Herpes (HSV-1, HSV-2)" in stis:
-            st.subheader("Empiric treatment regimens for Herpes (HSV-1 and HSV-2):")
+            st.subheader("Initial diagnostic tests and empiric treatment regimens for Herpes (HSV-1 and HSV-2):")
             st.table({
+                "Test": ["Perform polymerase chain reaction (PCR) test or viral culture of the lesion"],
                 "Medication": ["Acyclovir", "Famciclovir", "Valacyclovir"],
                 "Dosage": ["400 mg tablets three times daily", "250 mg tablets three times daily", "1000 mg tablets twice daily"],
                 "Route": ["Oral", "Oral", "Oral"],
@@ -60,8 +54,9 @@ def main():
                 "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
             })
         if "Syphilis (Treponema pallidum)" in stis:
-            st.subheader("Empiric treatment regimen for Syphilis (Treponema pallidum):")
+            st.subheader("Initial diagnostic tests and empiric treatment regimen for Syphilis (Treponema pallidum):")
             st.table({
+                "Test": ["Perform TPHA or Rapid Syphilis Serologic Test"],
                 "Medication": ["Penicillin G Benzathine", "Alternatives", "Doxycycline", "Ceftriaxone"],
                 "Dosage": ["Single dose 2.4 million Units", "", "100 mg tablets twice daily", "1 g injection daily"],
                 "Route": ["Intramuscular", "", "Oral", "Oral"],
@@ -69,8 +64,9 @@ def main():
                 "Notes": ["Primary infection treatment", "", "Primary infection treatment", "Primary infection treatment"]
             })
         if "Lymphogranuloma venereum (Chlamydia trachomatis)" in stis:
-            st.subheader("Empiric treatment regimen for Lymphogranuloma venereum (Chlamydia trachomatis):")
+            st.subheader("Initial diagnostic tests and empiric treatment regimen for Lymphogranuloma venereum (Chlamydia trachomatis):")
             st.table({
+                "Test": ["Perform Nucleic acid amplification tests (NAATs) or Rapid LGV serologic test"],
                 "Medication": ["Doxycycline"],
                 "Dosage": ["100 mg tablets twice daily"],
                 "Route": ["Oral"],
@@ -78,16 +74,18 @@ def main():
                 "Notes": ["Primary infection treatment"]
             })
         if "Chancroid (Haemophilus ducreyi)" in stis:
-            st.subheader("Empiric treatment regimens for Chancroid (Haemophilus ducreyi):")
+            st.subheader("Initial diagnostic tests and empiric treatment regimens for Chancroid (Haemophilus ducreyi):")
             st.table({
+                "Test": ["Discard HSV and Syphilis with diagnostic tests, confirm clinical correlation with Chancroid and perform culture if available"],
                 "Medication": ["Azithromycin", "Ceftriaxone"],
                 "Dosage": ["1 gr tablet", "250 mg for injection"],
                 "Route": ["Oral", "Intramuscular"],
                 "Notes": ["Primary infection treatment", "Primary infection treatment"]
             })
         if "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis" in stis:
-            st.subheader("Empiric treatment regimens for Granuloma Inguinale (Klebsiella granulomatis):")
+            st.subheader("Initial diagnostic tests and empiric treatment regimens for Granuloma Inguinale (Klebsiella granulomatis):")
             st.table({
+                "Test": ["Collect a biopsy of tissue or ulcer and confirm Donovan bodies prior to empiric treatment"],
                 "Medication": ["Azithromycin", "Azithromycin", "Doxycycline", "Erythromycin"],
                 "Dosage": ["1 g tablets once a week", "500 mg tablets once daily", "500 mg tablets twice daily", "500 mg tablets four times a day"],
                 "Route": ["Oral", "Oral", "Oral", "Oral"],
@@ -330,4 +328,5 @@ def main():
 
 if __name__ == "__main__":
     main()
+
 
