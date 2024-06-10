@@ -10,6 +10,8 @@ def main():
 
     if "step" not in st.session_state:
         st.session_state.step = "A"
+    if "stis" not in st.session_state:
+        st.session_state.stis = []
 
     # Navigation Buttons
     def go_back():
@@ -330,4 +332,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
