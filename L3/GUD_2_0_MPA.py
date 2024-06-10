@@ -9,7 +9,7 @@ def reset():
 # Define the steps as separate functions
 def step_a():
     st.header("A) Known Exposure to STI causing Genital Ulcers?")
-    exposure = st.radio("Has the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("", "Yes", "No"), key="step_a")
+    exposure = st.radio("Please confirm if the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("", "Yes", "No"), key="step_a")
 
     if exposure == "Yes":
         st.session_state.step = "B"
