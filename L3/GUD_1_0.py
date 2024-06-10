@@ -12,43 +12,11 @@ def main():
 
     # Navigation Buttons
     def go_back():
-        if st.session_state.step == "B":
-            st.session_state.step = "A"
-        elif st.session_state.step == "C":
-            st.session_state.step = "B"
-        elif st.session_state.step == "D":
-            st.session_state.step = "C"
-        elif st.session_state.step == "E":
-            st.session_state.step = "A"
-        elif st.session_state.step == "F":
-            st.session_state.step = "E"
-        elif st.session_state.step == "G":
-            st.session_state.step = "F"
-        elif st.session_state.step == "H":
-            st.session_state.step = "G"
-        elif st.session_state.step == "I":
-            st.session_state.step = "G"
-        elif st.session_state.step == "J":
-            st.session_state.step = "I"
-        elif st.session_state.step == "K":
-            st.session_state.step = "F"
-        elif st.session_state.step == "L":
-            st.session_state.step = "K"
-        elif st.session_state.step == "M":
-            st.session_state.step = "K"
-        elif st.session_state.step == "N":
-            st.session_state.step = "L"
-        elif st.session_state.step == "O":
-            st.session_state.step = "L"
-        elif st.session_state.step == "P":
-            st.session_state.step = "O"
-        elif st.session_state.step == "Q":
-            st.session_state.step = "O"
-        elif st.session_state.step == "R":
-            st.session_state.step = "O"
-        elif st.session_state.step == "S":
-            st.session_state.step = "R"
-
+        step_order = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
+        current_index = step_order.index(st.session_state.step)
+        if current_index > 0:
+            st.session_state.step = step_order[current_index - 1]
+    
     # Step A
     if st.session_state.step == "A":
         st.header("A) Known Exposure to STI causing Genital Ulcers?")
@@ -278,7 +246,7 @@ def main():
 
     # Step O
     if st.session_state.step == "O":
-        st.header("O) High Risk Factors for Syphilis")
+        st.header("O) High Risk Factors for Lymphogranuloma Venereum")
         high_risk = st.multiselect("Has the patient or sexual partner lived or traveled to a Lymphogranuloma venereum endemic area? AND/OR Does the patient have painful or significant lymphadenopathy present? AND/OR Is the patient HIV positive male and has sex with other men?", ["Yes"])
         
         st.write("Click the info icon for more details on Lymphogranuloma Venereum Ulcers.")
