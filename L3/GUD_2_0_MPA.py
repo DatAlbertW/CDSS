@@ -105,6 +105,10 @@ def step_c():
         st.session_state.step = "B"
         st.rerun()
 
+    if st.button("Next"):
+        st.session_state.step = "D"
+        st.rerun()
+
 def step_d():
     st.header("D) Test Recommendation for New Genital Ulcer")
     st.write("Every patient with a new genital ulcer must be tested for Herpes (HSV-1, HSV-2) and Syphilis (Treponema pallidum) if available.")
@@ -112,31 +116,25 @@ def step_d():
         "STI": ["Herpes", "Syphilis"],
         "Test": ["Swab the lesion directly and perform Polymerase Chain Reaction (PCR) test. If PCR is not available, perform a viral culture.", "Perform Treponemal tests (TPHA or Rapid Serologic test)"]
     })
-    st.session_state.step = "E"
-    st.rerun()
+    st.subheader("Please confirm if the ulcer is painful?")
+    ulcer_painful = st.radio("", ("Yes", "No"), key="step_d")
+
+    if ulcer_painful == "Yes":
+        st.session_state.step = "E"
+    elif ulcer_painful == "No":
+        st.session_state.step = "I"
+
+    if st.button("Confirm"):
+        st.rerun()
 
     if st.button("Back"):
-        st.session_state.step = "A"
+        st.session_state.step = "C"
         st.rerun()
 
 def step_e():
-    st.header("E) Is the ulcer painful?")
-    ulcer_painful = st.radio("Please confirm if the ulcer is painful?", ("Yes", "No"), key="step_e")
-
-    if ulcer_painful == "Yes":
-        st.session_state.step = "F"
-        st.rerun()
-    elif ulcer_painful == "No":
-        st.session_state.step = "I"
-        st.rerun()
-
-    if st.button("Back"):
-        st.session_state.step = "D"
-        st.rerun()
-
-def step_f():
-    st.header("F) Appearance Consistent with Herpes?")
-    herpes_appearance = st.radio("Is the appearance consistent with Herpes (Herpes Simplex Virus 1 and 2)?", ("Yes", "No"), key="step_f")
+    st.header("E) Is the appearance consistent with Herpes (Herpes Simplex Virus 1 and 2)?")
+    herpes_appearance = st.radio("", ("Yes", "No"), key="step_e")
+    
     st.write("Click the info icon for more details on Herpes Ulcers.")
     if st.button("ℹ️", key="info_button_herpes"):
         st.info("""
@@ -150,9 +148,28 @@ def step_f():
         st.image('L3/images/herpes.jpeg', caption='Herpes Image', width=300)
     
     if herpes_appearance == "Yes":
+        st.session_state.step = "F"
+    elif herpes_appearance == "No":
         st.session_state.step = "G"
+
+    if st.button("Confirm"):
         st.rerun()
-    else:
+
+    if st.button("Back"):
+        st.session_state.step = "D"
+        st.rerun()
+
+def step_f():
+    st.header("F) Perform PCR test or viral culture of the lesion. Treat empirically for Herpes Simplex Virus.")
+    st.table({
+        "Medication": ["Acyclovir", "Famciclovir", "Valacyclovir"],
+        "Dosage": ["400 mg tablets three times daily", "250 mg tablets three times daily", "1000 mg tablets twice daily"],
+        "Route": ["Oral", "Oral", "Oral"],
+        "Duration": ["7-10 days for primary infection", "7-10 days for primary infection", "7-10 days for primary infection"],
+        "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
+    })
+    
+    if st.button("Next"):
         st.session_state.step = "H"
         st.rerun()
 
@@ -161,61 +178,59 @@ def step_f():
         st.rerun()
 
 def step_g():
-    st.header("G) Test and Empirical Treatment for Herpes")
-    st.write("Perform polymerase chain reaction (PCR) test or viral culture of the lesion. Treat empirically for Herpes Simplex Virus.")
-    st.table({
-        "Medication": ["Acyclovir", "Famciclovir", "Valacyclovir"],
-        "Dosage": ["400 mg tablets three times daily", "250 mg tablets three times daily", "1000 mg tablets twice daily"],
-        "Route": ["Oral", "Oral", "Oral"],
-        "Duration": ["7-10 days for primary infection", "7-10 days for primary infection", "7-10 days for primary infection"],
-        "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
-    })
-    st.session_state.step = "H"
-    st.rerun()
-
-    if st.button("Back"):
-        st.session_state.step = "F"
-        st.rerun()
-
-def step_h():
-    st.header("H) Further Evaluation")
-    st.write("If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
-    st.subheader("Follow up recommendations:")
-    st.markdown("""
-    - Schedule a follow up visit to assess clinical response of the empiric Treatment and review results of diagnostic Tests.
-    - Advise the patient to avoid any sexual activity while waiting for Test results.
-    - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
-    - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
-    """)
-
-    if st.button("Back"):
-        st.session_state.step = "G"
-        st.rerun()
-
-def step_i():
-    st.header("I) Rapid Syphilis Testing Availability")
-    rapid_syphilis = st.radio("Is rapid Syphilis testing available? (e.g. TPHA, Rapid Serologic Test)?", ("Yes", "No"), key="step_i")
-
-    if rapid_syphilis == "Yes":
-        st.session_state.step = "J"
-        st.rerun()
-    elif rapid_syphilis == "No":
-        st.session_state.step = "K"
+    st.header("G) Consider alternative diagnosis (e.g., syphilis, chancroid). If risk factors for one of these diagnoses, perform diagnostic tests and administer empiric treatment.")
+    
+    if st.button("Next"):
+        st.session_state.step = "H"
         st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "E"
         st.rerun()
 
+def step_h():
+    st.header("H) Further evaluation needed if initial lab tests are negative and/or patient did not respond to initial therapy.")
+    st.subheader("Patient Advice and Follow Up:")
+    st.markdown("""
+    - Schedule a follow-up visit to assess clinical response of the empiric treatment and review results of diagnostic tests.
+    - Advise the patient to avoid any sexual activity while waiting for test results.
+    - If empiric therapy was initiated, the patient must avoid any sexual activity for at least 7 days.
+    - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
+    """)
+    
+    if st.button("Reset"):
+        reset()
+
+    if st.button("Back"):
+        st.session_state.step = "G"
+        st.rerun()
+
+def step_i():
+    st.header("I) Is rapid Syphilis testing available? (e.g. TPHA, Rapid Serologic Test)?")
+    rapid_syphilis = st.radio("", ("Yes", "No"), key="step_i")
+
+    if rapid_syphilis == "Yes":
+        st.session_state.step = "J"
+    elif rapid_syphilis == "No":
+        st.session_state.step = "K"
+
+    if st.button("Confirm"):
+        st.rerun()
+
+    if st.button("Back"):
+        st.session_state.step = "D"
+        st.rerun()
+
 def step_j():
-    st.header("J) Syphilis Testing Result")
-    syphilis_result = st.radio("Is testing positive for Syphilis?", ("Yes", "No"), key="step_j")
+    st.header("J) Is testing positive for Syphilis?")
+    syphilis_result = st.radio("", ("Yes", "No"), key="step_j")
 
     if syphilis_result == "Yes":
         st.session_state.step = "L"
-        st.rerun()
-    else:
+    elif syphilis_result == "No":
         st.session_state.step = "M"
+
+    if st.button("Confirm"):
         st.rerun()
 
     if st.button("Back"):
@@ -223,8 +238,8 @@ def step_j():
         st.rerun()
 
 def step_k():
-    st.header("K) Patient Risk Factors for Syphilis")
-    patient_risk = st.multiselect("Is the patient at high risk for Syphilis (Treponema Pallidum):", ["Man who haves sex with other men", "Patient engages in commercial sex work", "Exchange sex for drugs", "Unlikely to return for follow-up", "Unlikely to abstain from sexual contact until the diagnosis testing is completed"], key="step_k")
+    st.header("K) Is the patient at high risk for Syphilis (Treponema Pallidum)?")
+    patient_risk = st.multiselect("Select risk factors:", ["Man who haves sex with other men", "Patient engages in commercial sex work", "Exchange sex for drugs", "Unlikely to return for follow-up", "Unlikely to abstain from sexual contact until the diagnosis testing is completed"], key="step_k")
     
     st.write("Click the info icon for more details on Primary Syphilis Ulcers.")
     if st.button("ℹ️", key="info_syphilis"):
@@ -240,9 +255,10 @@ def step_k():
 
     if patient_risk:
         st.session_state.step = "P"
-        st.rerun()
     else:
         st.session_state.step = "Q"
+
+    if st.button("Confirm"):
         st.rerun()
 
     if st.button("Back"):
@@ -258,13 +274,16 @@ def step_l():
         "Duration": ["Single dose", "", "14 days", "10-14 days"],
         "Notes": ["Primary infection treatment", "", "Primary infection treatment", "Primary infection treatment"]
     })
-    st.subheader("Follow up recommendations:")
+    st.subheader("Patient Advice and Follow Up:")
     st.markdown("""
-    - Schedule a follow up visit to assess clinical response of the empiric Treatment and review results of diagnostic Tests.
-    - Advise the patient to avoid any sexual activity while waiting for Test results.
-    - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
-    - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
+    - Schedule a follow-up visit to assess clinical response of the empiric treatment and review results of diagnostic tests.
+    - Advise the patient to avoid any sexual activity while waiting for test results.
+    - If empiric therapy was initiated, the patient must avoid any sexual activity for at least 7 days.
+    - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
     """)
+    
+    if st.button("Reset"):
+        reset()
 
     if st.button("Back"):
         st.session_state.step = "J"
@@ -272,7 +291,7 @@ def step_l():
 
 def step_m():
     st.header("M) High Risk Factors for Lymphogranuloma Venereum")
-    high_risk = st.multiselect("Has the patient or sexual partner lived or traveled to a Lymphogranuloma venereum endemic area? AND/OR Does the patient have painful or significant lymphadenopathy present? AND/OR Is the patient HIV positive male and has sex with other men?", ["Yes"], key="step_m")
+    high_risk = st.multiselect("Select risk factors:", ["Has the patient or sexual partner lived or traveled to a Lymphogranuloma venereum endemic area?", "Does the patient have painful or significant lymphadenopathy present?", "Is the patient HIV positive male and has sex with other men?"], key="step_m")
     
     st.write("Click the info icon for more details on Lymphogranuloma Venereum Ulcers.")
     if st.button("ℹ️", key="info_chlamydia"):
@@ -287,9 +306,10 @@ def step_m():
 
     if high_risk:
         st.session_state.step = "N"
-        st.rerun()
     else:
         st.session_state.step = "O"
+
+    if st.button("Confirm"):
         st.rerun()
 
     if st.button("Back"):
@@ -297,7 +317,7 @@ def step_m():
         st.rerun()
 
 def step_n():
-    st.header("N) Perform NAAT for Lymphogranuloma venereum and Treat Empirically")
+    st.header("N) Perform NAAT for Lymphogranuloma venereum (Chlamydia) and treat empirically while awaiting test results.")
     st.table({
         "Medication": ["Doxycycline"],
         "Dosage": ["100 mg tablets twice daily"],
@@ -305,7 +325,10 @@ def step_n():
         "Duration": ["21 days"],
         "Notes": ["Primary infection treatment"]
     })
-    st.write("Await for Test results. If the initial Laboratory tests are negative and/or the patient did not respond to therapy, further evaluation is needed, including evaluation for non-STI causes.")
+    st.write("If the initial lab tests are negative and/or the patient did not respond to therapy, further evaluation is needed, including evaluation for non-STI causes.")
+    
+    if st.button("Reset"):
+        reset()
 
     if st.button("Back"):
         st.session_state.step = "M"
@@ -313,21 +336,24 @@ def step_n():
 
 def step_o():
     st.header("O) Await Test Results")
-    st.write("Await for Test results. If the initial Laboratory tests are negative and/or the patient did not respond to therapy, further evaluation is needed, including evaluation for non-STI causes.")
-    st.subheader("Follow up recommendations:")
+    st.write("Await test results. If the initial laboratory tests are negative and/or the patient did not respond to therapy, further evaluation is needed, including evaluation for non-STI causes.")
+    st.subheader("Patient Advice and Follow Up:")
     st.markdown("""
-    - Schedule a follow up visit to assess clinical response of the empiric Treatment and review results of diagnostic Tests.
-    - Advise the patient to avoid any sexual activity while waiting for Test results.
-    - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
-    - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
+    - Schedule a follow-up visit to assess clinical response of the empiric treatment and review results of diagnostic tests.
+    - Advise the patient to avoid any sexual activity while waiting for test results.
+    - If empiric therapy was initiated, the patient must avoid any sexual activity for at least 7 days.
+    - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
     """)
+    
+    if st.button("Reset"):
+        reset()
 
     if st.button("Back"):
         st.session_state.step = "N"
         st.rerun()
 
 def step_p():
-    st.header("P) Treat Empirically for Primary Syphilis")
+    st.header("P) Treat empirically for Primary Syphilis while awaiting test results.")
     st.table({
         "Medication": ["Penicillin G Benzathine", "Alternatives", "Doxycycline", "Ceftriaxone"],
         "Dosage": ["Single dose 2.4 million Units", "", "100 mg tablets twice daily", "1 g injection daily"],
@@ -335,8 +361,10 @@ def step_p():
         "Duration": ["Single dose", "", "14 days", "10-14 days"],
         "Notes": ["Primary infection treatment", "", "Primary infection treatment", "Primary infection treatment"]
     })
-    st.session_state.step = "O"
-    st.rerun()
+    
+    if st.button("Next"):
+        st.session_state.step = "M"
+        st.rerun()
 
     if st.button("Back"):
         st.session_state.step = "K"
@@ -345,13 +373,16 @@ def step_p():
 def step_q():
     st.header("Q) Further Evaluation")
     st.write("If the initial lab tests are negative, further evaluation is needed, including evaluation for non-STI causes.")
-    st.subheader("Follow up recommendations:")
+    st.subheader("Patient Advice and Follow Up:")
     st.markdown("""
-    - Schedule a follow up visit to assess clinical response of the empiric Treatment and review results of diagnostic Tests.
-    - Advise the patient to avoid any sexual activity while waiting for Test results.
-    - If empiric therapy was initiated the patient must avoid any sexual activity for at least 7 days.
-    - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
+    - Schedule a follow-up visit to assess clinical response of the empiric treatment and review results of diagnostic tests.
+    - Advise the patient to avoid any sexual activity while waiting for test results.
+    - If empiric therapy was initiated, the patient must avoid any sexual activity for at least 7 days.
+    - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
     """)
+    
+    if st.button("Reset"):
+        reset()
 
     if st.button("Back"):
         st.session_state.step = "K"
@@ -406,5 +437,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
