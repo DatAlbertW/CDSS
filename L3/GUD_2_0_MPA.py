@@ -1,10 +1,33 @@
 import streamlit as st
+import json
 
 # Reset function to clear session state
 def reset():
     st.session_state.clear()
     st.session_state.step = "A"
     st.rerun()
+
+# Save progress to a JSON file
+def save_progress():
+    progress = {
+        "step": st.session_state.step,
+        "stis": st.session_state.get("stis", [])
+    }
+    with open("progress.json", "w") as f:
+        json.dump(progress, f)
+    st.success("Progress saved!")
+
+# Load progress from a JSON file
+def load_progress():
+    try:
+        with open("progress.json", "r") as f:
+            progress = json.load(f)
+            st.session_state.step = progress["step"]
+            st.session_state.stis = progress.get("stis", [])
+            st.success("Progress loaded!")
+            st.rerun()
+    except FileNotFoundError:
+        st.error("No saved progress found!")
 
 # Helper function to format the exposure text adaptively
 def format_exposure_text(stis):
@@ -13,7 +36,7 @@ def format_exposure_text(stis):
     else:
         return f"The patient has been exposed to {', '.join(stis[:-1])} and {stis[-1]}, therefore the following empirical treatment is recommended:"
 
-# Define the steps as separate functions
+# Step Functions
 def step_a():
     st.header("A) Known Exposure to STI causing Genital Ulcers?")
     exposure = st.radio("Has the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("", "Yes", "No"), key="step_a")
@@ -388,6 +411,46 @@ def step_q():
         st.session_state.step = "K"
         st.rerun()
 
+# Sidebar for navigation and progress
+def sidebar():
+    st.sidebar.header("Navigation")
+    steps = {
+        "A": "Known Exposure",
+        "B": "Select STI",
+        "C": "Empiric Treatment",
+        "D": "Test Recommendation",
+        "E": "Herpes Appearance",
+        "F": "Herpes Treatment",
+        "G": "Alternative Diagnosis",
+        "H": "Further Evaluation",
+        "I": "Syphilis Testing",
+        "J": "Syphilis Result",
+        "K": "Syphilis Risk Factors",
+        "L": "Primary Syphilis Treatment",
+        "M": "Lymphogranuloma Venereum Risk Factors",
+        "N": "Lymphogranuloma Venereum Treatment",
+        "O": "Await Test Results",
+        "P": "Empiric Syphilis Treatment",
+        "Q": "Further Evaluation"
+    }
+    for step, description in steps.items():
+        if st.button(description):
+            st.session_state.step = step
+            st.rerun()
+    st.sidebar.button("Save Progress", on_click=save_progress)
+    st.sidebar.button("Load Progress", on_click=load_progress)
+    st.sidebar.button("Reset", on_click=reset)
+
+# Progress bar
+def progress_bar():
+    steps = {
+        "A": 1, "B": 2, "C": 3, "D": 4, "E": 5, "F": 6, "G": 7, "H": 8,
+        "I": 9, "J": 10, "K": 11, "L": 12, "M": 13, "N": 14, "O": 15, "P": 16, "Q": 17
+    }
+    max_steps = len(steps)
+    current_step = steps.get(st.session_state.step, 1)
+    st.progress(current_step / max_steps)
+
 # Main function to control the flow
 def main():
     st.title("STI Genital Ulcers Decision Tree")
@@ -396,6 +459,9 @@ def main():
         st.session_state.step = "A"
     if "stis" not in st.session_state:
         st.session_state.stis = []
+
+    sidebar()
+    progress_bar()
 
     # Navigation based on the current step
     if st.session_state.step == "A":
@@ -432,8 +498,6 @@ def main():
         step_p()
     elif st.session_state.step == "Q":
         step_q()
-
-    st.button("Reset", on_click=reset, key="reset")
 
 if __name__ == "__main__":
     main()
