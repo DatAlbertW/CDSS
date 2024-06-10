@@ -34,12 +34,14 @@ def main():
         stis = st.multiselect("Select the STI", ["Herpes (HSV-1, HSV-2)", "Syphilis (Treponema pallidum)", "Lymphogranuloma venereum (Chlamydia trachomatis)", "Chancroid (Haemophilus ducreyi)", "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis"], key="step_b")
         
         if stis:
+            st.session_state.stis = stis
             st.session_state.step = "D"
         
         st.button("Back", on_click=go_back, key="back_b")
     
     # Step D
     if st.session_state.step == "D":
+        stis = st.session_state.get("stis", [])
         st.header("D) Initiate Empiric Treatment")
         st.write(f"The patient has been exposed to {', '.join(stis)}, therefore the following empirical treatment is recommended:")
 
@@ -328,6 +330,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-
-
