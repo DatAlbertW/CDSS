@@ -10,13 +10,12 @@ def main():
     if "step" not in st.session_state:
         st.session_state.step = "A"
 
-    # Navigation Buttons
     def go_back():
         step_order = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S"]
         current_index = step_order.index(st.session_state.step)
         if current_index > 0:
             st.session_state.step = step_order[current_index - 1]
-    
+
     # Step A
     if st.session_state.step == "A":
         st.header("A) Known Exposure to STI causing Genital Ulcers?")
@@ -28,27 +27,29 @@ def main():
             st.session_state.step = "E"
     
     # Step B
-    if st.session_state.step == "B":
+    elif st.session_state.step == "B":
         st.header("B) Select the STI the patient has been exposed to")
         stis = st.multiselect("Select the STI", ["Herpes (HSV-1, HSV-2)", "Syphilis (Treponema pallidum)", "Lymphogranuloma venereum (Chlamydia trachomatis)", "Chancroid (Haemophilus ducreyi)", "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis"])
         
         if stis:
+            st.session_state.stis = stis
             st.session_state.step = "C"
         
         st.button("Back", on_click=go_back)
     
     # Step C
-    if st.session_state.step == "C":
+    elif st.session_state.step == "C":
         st.header("C) Test Recommendation")
-        st.write(f"Test for {', '.join(stis)} if available")
+        st.write(f"Test for {', '.join(st.session_state.stis)} if available")
         st.session_state.step = "D"
         st.button("Back", on_click=go_back)
 
     # Step D
-    if st.session_state.step == "D":
+    elif st.session_state.step == "D":
         st.header("D) Initiate Empiric Treatment")
-        st.write(f"The patient has been exposed to {', '.join(stis)}, therefore the following empirical treatment is recommended:")
-        if "Herpes (HSV-1, HSV-2)" in stis:
+        st.write(f"The patient has been exposed to {', '.join(st.session_state.stis)}, therefore the following empirical treatment is recommended:")
+        
+        if "Herpes (HSV-1, HSV-2)" in st.session_state.stis:
             st.table({
                 "Medication": ["Acyclovir", "Famciclovir", "Valacyclovir"],
                 "Dosage": ["400 mg tablets three times daily", "250 mg tablets three times daily", "1000 mg tablets twice daily"],
@@ -56,7 +57,7 @@ def main():
                 "Duration": ["7-10 days for primary infection", "7-10 days for primary infection", "7-10 days for primary infection"],
                 "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
             })
-        if "Syphilis (Treponema pallidum)" in stis:
+        if "Syphilis (Treponema pallidum)" in st.session_state.stis:
             st.table({
                 "Medication": ["Penicillin G Benzathine", "Alternatives", "Doxycycline", "Ceftriaxone"],
                 "Dosage": ["Single dose 2.4 million Units", "", "100 mg tablets twice daily", "1 g injection daily"],
@@ -64,7 +65,7 @@ def main():
                 "Duration": ["Single dose", "", "14 days", "10-14 days"],
                 "Notes": ["Primary infection treatment", "", "Primary infection treatment", "Primary infection treatment"]
             })
-        if "Lymphogranuloma venereum (Chlamydia trachomatis)" in stis:
+        if "Lymphogranuloma venereum (Chlamydia trachomatis)" in st.session_state.stis:
             st.table({
                 "Medication": ["Doxycycline"],
                 "Dosage": ["100 mg tablets twice daily"],
@@ -72,14 +73,14 @@ def main():
                 "Duration": ["21 days"],
                 "Notes": ["Primary infection treatment"]
             })
-        if "Chancroid (Haemophilus ducreyi)" in stis:
+        if "Chancroid (Haemophilus ducreyi)" in st.session_state.stis:
             st.table({
                 "Medication": ["Azithromycin", "Ceftriaxone"],
                 "Dosage": ["1 gr tablet", "250 mg for injection"],
                 "Route": ["Oral", "Intramuscular"],
                 "Notes": ["Primary infection treatment", "Primary infection treatment"]
             })
-        if "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis" in stis:
+        if "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis" in st.session_state.stis:
             st.table({
                 "Medication": ["Azithromycin", "Azithromycin", "Doxycycline", "Erythromycin"],
                 "Dosage": ["1 g tablets once a week", "500 mg tablets once daily", "500 mg tablets twice daily", "500 mg tablets four times a day"],
@@ -98,7 +99,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step E
-    if st.session_state.step == "E":
+    elif st.session_state.step == "E":
         st.header("E) Test Recommendation for New Genital Ulcer")
         st.write("Every patient with a new genital ulcer must be tested for Herpes (HSV-1, HSV-2) and Syphilis (Treponema pallidum) if available.")
         st.table({
@@ -109,7 +110,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step F
-    if st.session_state.step == "F":
+    elif st.session_state.step == "F":
         st.header("F) Is the ulcer painful?")
         ulcer_painful = st.radio("Is the ulcer painful?", ("Yes", "No"))
 
@@ -121,7 +122,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step G
-    if st.session_state.step == "G":
+    elif st.session_state.step == "G":
         st.header("G) Appearance Consistent with Herpes?")
         herpes_appearance = st.radio("Is the appearance consistent with Herpes (Herpes Simplex Virus 1 and 2)?", ("Yes", "No"))
         st.write("Click the info icon for more details on Herpes Ulcers.")
@@ -144,7 +145,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step H
-    if st.session_state.step == "H":
+    elif st.session_state.step == "H":
         st.header("H) Test and Empirical Treatment for Herpes")
         st.write("Perform polymerase chain reaction (PCR) test or viral culture of the lesion. Treat empirically for Herpes Simplex Virus.")
         st.table({
@@ -158,14 +159,14 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step I
-    if st.session_state.step == "I":
+    elif st.session_state.step == "I":
         st.header("I) Consider Alternative Diagnosis")
         st.write("Consider alternative diagnosis (e.g. syphilis, chancroid). If risk factors for one of these diagnoses, perform diagnostic Tests and administer empiric treatment.")
         st.session_state.step = "J"
         st.button("Back", on_click=go_back)
 
     # Step J
-    if st.session_state.step == "J":
+    elif st.session_state.step == "J":
         st.header("J) Further Evaluation")
         st.write("If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
         st.subheader("Follow up recommendations:")
@@ -178,7 +179,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step K
-    if st.session_state.step == "K":
+    elif st.session_state.step == "K":
         st.header("K) Rapid Syphilis Testing Availability")
         rapid_syphilis = st.radio("Is rapid Syphilis testing available? (e.g. TPHA, Rapid Serologic Test)?", ("Yes", "No"))
 
@@ -190,7 +191,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step L
-    if st.session_state.step == "L":
+    elif st.session_state.step == "L":
         st.header("L) Syphilis Testing Result")
         syphilis_result = st.radio("Is testing positive for Syphilis?", ("Yes", "No"))
 
@@ -202,7 +203,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step M
-    if st.session_state.step == "M":
+    elif st.session_state.step == "M":
         st.header("M) Patient Risk Factors for Syphilis")
         patient_risk = st.multiselect("Is the patient at high risk for Syphilis (Treponema Pallidum):", ["Man who haves sex with other men", "Patient engages in commercial sex work", "Exchange sex for drugs", "Unlikely to return for follow-up", "Unlikely to abstain from sexual contact until the diagnosis testing is completed"])
         
@@ -226,7 +227,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step N
-    if st.session_state.step == "N":
+    elif st.session_state.step == "N":
         st.header("N) Treat for Primary Syphilis")
         st.table({
             "Medication": ["Penicillin G Benzathine", "Alternatives", "Doxycycline", "Ceftriaxone"],
@@ -245,7 +246,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step O
-    if st.session_state.step == "O":
+    elif st.session_state.step == "O":
         st.header("O) High Risk Factors for Lymphogranuloma Venereum")
         high_risk = st.multiselect("Has the patient or sexual partner lived or traveled to a Lymphogranuloma venereum endemic area? AND/OR Does the patient have painful or significant lymphadenopathy present? AND/OR Is the patient HIV positive male and has sex with other men?", ["Yes"])
         
@@ -268,7 +269,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step P
-    if st.session_state.step == "P":
+    elif st.session_state.step == "P":
         st.header("P) Perform NAAT for Lymphogranuloma venereum and Treat Empirically")
         st.table({
             "Medication": ["Doxycycline"],
@@ -281,7 +282,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step Q
-    if st.session_state.step == "Q":
+    elif st.session_state.step == "Q":
         st.header("Q) Await Test Results")
         st.write("Await for Test results. If the initial Laboratory tests are negative and/or the patient did not respond to therapy, further evaluation is needed, including evaluation for non-STI causes.")
         st.subheader("Follow up recommendations:")
@@ -294,7 +295,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step R
-    if st.session_state.step == "R":
+    elif st.session_state.step == "R":
         st.header("R) Treat Empirically for Primary Syphilis")
         st.table({
             "Medication": ["Penicillin G Benzathine", "Alternatives", "Doxycycline", "Ceftriaxone"],
@@ -307,7 +308,7 @@ def main():
         st.button("Back", on_click=go_back)
 
     # Step S
-    if st.session_state.step == "S":
+    elif st.session_state.step == "S":
         st.header("S) Further Evaluation")
         st.write("If the initial lab tests are negative, further evaluation is needed, including evaluation for non-STI causes.")
         st.subheader("Follow up recommendations:")
