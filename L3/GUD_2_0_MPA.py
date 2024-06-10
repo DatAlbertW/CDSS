@@ -57,7 +57,7 @@ def step_b():
         st.session_state.step = "C"
         st.rerun()
     
-    if st.button("Back"):
+    if st.button("Back", key="back_b"):
         st.session_state.step = "A"
         st.rerun()
 
@@ -124,11 +124,11 @@ def step_c():
     - Partners should be notified, tested and educated on the appearance of lesions and symptoms.
     """)
     
-    if st.button("Back"):
+    if st.button("Back", key="back_c"):
         st.session_state.step = "B"
         st.rerun()
 
-    if st.button("Next"):
+    if st.button("Next", key="next_c"):
         st.session_state.step = "D"
         st.rerun()
 
@@ -147,10 +147,10 @@ def step_d():
     elif ulcer_painful == "No":
         st.session_state.step = "I"
 
-    if st.button("Confirm"):
+    if st.button("Confirm", key="confirm_d"):
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_d"):
         st.session_state.step = "C"
         st.rerun()
 
@@ -175,10 +175,10 @@ def step_e():
     elif herpes_appearance == "No":
         st.session_state.step = "G"
 
-    if st.button("Confirm"):
+    if st.button("Confirm", key="confirm_e"):
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_e"):
         st.session_state.step = "D"
         st.rerun()
 
@@ -192,22 +192,22 @@ def step_f():
         "Notes": ["Primary infection treatment", "Primary infection treatment", "Primary infection treatment"]
     })
     
-    if st.button("Next"):
+    if st.button("Next", key="next_f"):
         st.session_state.step = "H"
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_f"):
         st.session_state.step = "E"
         st.rerun()
 
 def step_g():
     st.header("G) Consider alternative diagnosis (e.g., syphilis, chancroid). If risk factors for one of these diagnoses, perform diagnostic tests and administer empiric treatment.")
     
-    if st.button("Next"):
+    if st.button("Next", key="next_g"):
         st.session_state.step = "H"
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_g"):
         st.session_state.step = "E"
         st.rerun()
 
@@ -221,10 +221,10 @@ def step_h():
     - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
     """)
     
-    if st.button("Reset"):
+    if st.button("Reset", key="reset_h"):
         reset()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_h"):
         st.session_state.step = "G"
         st.rerun()
 
@@ -237,10 +237,10 @@ def step_i():
     elif rapid_syphilis == "No":
         st.session_state.step = "K"
 
-    if st.button("Confirm"):
+    if st.button("Confirm", key="confirm_i"):
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_i"):
         st.session_state.step = "D"
         st.rerun()
 
@@ -253,10 +253,10 @@ def step_j():
     elif syphilis_result == "No":
         st.session_state.step = "M"
 
-    if st.button("Confirm"):
+    if st.button("Confirm", key="confirm_j"):
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_j"):
         st.session_state.step = "I"
         st.rerun()
 
@@ -281,10 +281,10 @@ def step_k():
     else:
         st.session_state.step = "Q"
 
-    if st.button("Confirm"):
+    if st.button("Confirm", key="confirm_k"):
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_k"):
         st.session_state.step = "I"
         st.rerun()
 
@@ -305,10 +305,10 @@ def step_l():
     - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
     """)
     
-    if st.button("Reset"):
+    if st.button("Reset", key="reset_l"):
         reset()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_l"):
         st.session_state.step = "J"
         st.rerun()
 
@@ -332,10 +332,10 @@ def step_m():
     else:
         st.session_state.step = "O"
 
-    if st.button("Confirm"):
+    if st.button("Confirm", key="confirm_m"):
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_m"):
         st.session_state.step = "J"
         st.rerun()
 
@@ -350,10 +350,10 @@ def step_n():
     })
     st.write("If the initial lab tests are negative and/or the patient did not respond to therapy, further evaluation is needed, including evaluation for non-STI causes.")
     
-    if st.button("Reset"):
+    if st.button("Reset", key="reset_n"):
         reset()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_n"):
         st.session_state.step = "M"
         st.rerun()
 
@@ -368,10 +368,10 @@ def step_o():
     - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
     """)
     
-    if st.button("Reset"):
+    if st.button("Reset", key="reset_o"):
         reset()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_o"):
         st.session_state.step = "N"
         st.rerun()
 
@@ -385,11 +385,11 @@ def step_p():
         "Notes": ["Primary infection treatment", "", "Primary infection treatment", "Primary infection treatment"]
     })
     
-    if st.button("Next"):
+    if st.button("Next", key="next_p"):
         st.session_state.step = "M"
         st.rerun()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_p"):
         st.session_state.step = "K"
         st.rerun()
 
@@ -404,10 +404,10 @@ def step_q():
     - Partners should be notified, tested, and educated on the appearance of lesions and symptoms.
     """)
     
-    if st.button("Reset"):
+    if st.button("Reset", key="reset_q"):
         reset()
 
-    if st.button("Back"):
+    if st.button("Back", key="back_q"):
         st.session_state.step = "K"
         st.rerun()
 
@@ -434,12 +434,12 @@ def sidebar():
         "Q": "Further Evaluation"
     }
     for step, description in steps.items():
-        if st.button(description):
+        if st.button(description, key=f"sidebar_{step}"):
             st.session_state.step = step
             st.rerun()
-    st.sidebar.button("Save Progress", on_click=save_progress)
-    st.sidebar.button("Load Progress", on_click=load_progress)
-    st.sidebar.button("Reset", on_click=reset)
+    st.sidebar.button("Save Progress", on_click=save_progress, key="sidebar_save")
+    st.sidebar.button("Load Progress", on_click=load_progress, key="sidebar_load")
+    st.sidebar.button("Reset", on_click=reset, key="sidebar_reset")
 
 # Progress bar
 def progress_bar():
@@ -501,3 +501,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
