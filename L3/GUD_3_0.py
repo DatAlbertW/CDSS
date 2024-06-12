@@ -123,6 +123,8 @@ if st.session_state.step == 'E':
         - **Adenopathy:** Inflamed painful lymph nodes.
         - **Large, Crusted Erosions:** Can occur in immunosuppressed patients.
         """)
+        # Herpes Vesicles Image
+        st.image('L3/images/herpes.jpeg', caption='Herpes Image', width=300)
 
 if st.session_state.step == 'F':
     st.write("Perform polymerase chain reaction (PCR) test or viral culture of the lesion. Treat empirically for Herpes Simplex Virus.")
@@ -158,6 +160,8 @@ if st.session_state.step == 'I':
         - Generally a single lesion, although multiple chancres can be present.
         - **Adenopathy:** Regional painless firm and rubbery lymph nodes.
         """)
+        # Chancre Image
+        st.image('L3/images/syphilis.jpeg', caption='Syphilis Image', width=300)
 
 if st.session_state.step == 'J':
     high_risk = st.multiselect("Is the patient at high risk for Syphilis (Treponema Pallidum)?", ["Man who has sex with other men", "Patient engages in commercial sex work", "Exchange sex for drugs", "Unlikely to return for follow-up", "Unlikely to abstain from sexual contact until the diagnosis testing is completed"])
@@ -188,6 +192,8 @@ if st.session_state.step == 'L':
         - Ulcers heal fast and spontaneously.
         - **Adenopathy:** More common in males, Matted clusters, Swollen lymph node (“Buboe”), Unilateral or often bilateral.
         """)
+        # Chlamydia Image
+        st.image('L3/images/chlamydia.jpeg', caption='Chlamydia Image', width=300)
 
 if st.session_state.step == 'M':
     st.write("Perform Nucleic Acid Amplification Test (NAAT) for Lymphogranuloma venereum (Chlamydia) and treat empirically while awaiting for Test results.")
