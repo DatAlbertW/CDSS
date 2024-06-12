@@ -71,9 +71,11 @@ if 'step' not in st.session_state:
 if st.session_state.step == 'A':
     exposure = st.radio("Has the patient had a known exposure to a Sexually Transmitted Infection (STI) that causes genital ulcers in the last 90 days?", ("Yes", "No"))
     if exposure == "Yes":
-        st.session_state.step = 'B'
+        if st.button("Next"):
+            st.session_state.step = 'B'
     elif exposure == "No":
-        st.session_state.step = 'D'
+        if st.button("Next"):
+            st.session_state.step = 'D'
 
 if st.session_state.step == 'B':
     stis = st.multiselect("Select the Sexually Transmitted Infection (STI) that the patient has been exposed to:", ["Herpes (HSV-1, HSV-2)", "Syphilis (Treponema pallidum)", "Lymphogranuloma venereum (Chlamydia trachomatis)", "Chancroid (Haemophilus ducreyi)", "Granuloma Inguinale (Klebsiella granulomatis) aka Donovanosis"])
@@ -98,10 +100,11 @@ if st.session_state.step == 'C':
 
 if st.session_state.step == 'D':
     pain = st.radio("Please confirm if the ulcer is painful?", ("Yes", "No"))
-    if pain == "Yes":
-        st.session_state.step = 'E'
-    elif pain == "No":
-        st.session_state.step = 'H'
+    if st.button("Next"):
+        if pain == "Yes":
+            st.session_state.step = 'E'
+        elif pain == "No":
+            st.session_state.step = 'H'
     st.write("Every patient with a new genital ulcer must be tested for Herpes (HSV-1, HSV-2) and Syphilis (Treponema pallidum) if available.")
     st.table({
         "Test": ["Herpes: swab the lesion directly and perform Polymerase Chain Reaction (PCR) test. If PCR is not available, perform a viral culture.", "Syphilis: Perform Treponemal tests (TPHA or Rapid Serologic test)."]
@@ -109,10 +112,11 @@ if st.session_state.step == 'D':
 
 if st.session_state.step == 'E':
     appearance = st.radio("Is the appearance consistent with Herpes (Herpes Simplex Virus)?", ("Yes", "No"))
-    if appearance == "Yes":
-        st.session_state.step = 'F'
-    elif appearance == "No":
-        st.session_state.step = 'G'
+    if st.button("Next"):
+        if appearance == "Yes":
+            st.session_state.step = 'F'
+        elif appearance == "No":
+            st.session_state.step = 'G'
     # Information button for Herpes
     if st.button("ℹ️ Info on Herpes", key="info_button_herpes"):
         st.info("""
@@ -129,7 +133,8 @@ if st.session_state.step == 'E':
 if st.session_state.step == 'F':
     st.write("Perform polymerase chain reaction (PCR) test or viral culture of the lesion. Treat empirically for Herpes Simplex Virus.")
     display_herpes_table()
-    st.session_state.step = 'G'
+    if st.button("Next"):
+        st.session_state.step = 'G'
 
 if st.session_state.step == 'G':
     st.write("Consider alternative diagnosis (e.g. syphilis, chancroid). If risk factors for one of these diagnoses, perform diagnostic Tests and administer empiric treatment. If the initial lab tests are negative and/or the patient did not respond to initial therapy, further evaluation is needed including evaluation for non-STI causes.")
@@ -139,17 +144,19 @@ if st.session_state.step == 'G':
 
 if st.session_state.step == 'H':
     rapid_test = st.radio("Is rapid Syphilis testing available? (e.g. TPHA, Rapid Serologic Test)?", ("Yes", "No"))
-    if rapid_test == "Yes":
-        st.session_state.step = 'I'
-    elif rapid_test == "No":
-        st.session_state.step = 'J'
+    if st.button("Next"):
+        if rapid_test == "Yes":
+            st.session_state.step = 'I'
+        elif rapid_test == "No":
+            st.session_state.step = 'J'
 
 if st.session_state.step == 'I':
     positive = st.radio("Is testing positive for Syphilis?", ("Yes", "No"))
-    if positive == "Yes":
-        st.session_state.step = 'K'
-    else:
-        st.session_state.step = 'L'
+    if st.button("Next"):
+        if positive == "Yes":
+            st.session_state.step = 'K'
+        else:
+            st.session_state.step = 'L'
     # Information button for Syphilis
     if st.button("ℹ️ Info on Syphilis", key="info_button_syphilis"):
         st.info("""
@@ -165,10 +172,11 @@ if st.session_state.step == 'I':
 
 if st.session_state.step == 'J':
     high_risk = st.multiselect("Is the patient at high risk for Syphilis (Treponema Pallidum)?", ["Man who has sex with other men", "Patient engages in commercial sex work", "Exchange sex for drugs", "Unlikely to return for follow-up", "Unlikely to abstain from sexual contact until the diagnosis testing is completed"])
-    if high_risk:
-        st.session_state.step = 'O'
-    else:
-        st.session_state.step = 'P'
+    if st.button("Next"):
+        if high_risk:
+            st.session_state.step = 'O'
+        else:
+            st.session_state.step = 'P'
 
 if st.session_state.step == 'K':
     st.write("Treat for Primary Syphilis.")
@@ -179,10 +187,11 @@ if st.session_state.step == 'K':
 
 if st.session_state.step == 'L':
     lgv_risk = st.multiselect("Select if the patient or sexual partner has risk factors for Lymphogranuloma venereum:", ["Lived or traveled to a LGV endemic area", "Painful or significant lymphadenopathy present", "HIV positive male and has sex with other men"])
-    if lgv_risk:
-        st.session_state.step = 'M'
-    else:
-        st.session_state.step = 'N'
+    if st.button("Next"):
+        if lgv_risk:
+            st.session_state.step = 'M'
+        else:
+            st.session_state.step = 'N'
     # Information button for Lymphogranuloma Venereum
     if st.button("ℹ️ Info on LGV", key="info_button_lgv"):
         st.info("""
@@ -220,4 +229,5 @@ if st.session_state.step == 'P':
     display_follow_up()
     if st.button("Reset"):
         st.session_state.step = 'A'
+
 
