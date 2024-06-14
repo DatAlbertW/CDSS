@@ -30,9 +30,9 @@ Sexually Transmitted Infections (STIs) are a significant public health concern. 
 | 4. Decision Logic ?? (Specify decision logic using diagrams (BPMN) or decision tables (e.g., WHO SMART Guideline DAK) for diagnoses, treatment, or other relevant recommendations.) | Gerardo, Erzhena| |
 | 5. Identify challenges in translation of the L1 to the L2 (where did decisions have to be taken or gaps filled?) | Alberto, Janick | |
 | **L3** | | |
-| 1. Machine readable Code: any standard can be used as long it drives the L4 behaviour. Hard coded application will be accepted. (Consider UX (e.g. sequence and grouping of your questions) and maintainability of the code and data quality (e.g. constrain rules).) | Alberto, Jannick | |
+| 1. Machine readable Code: any standard can be used as long it drives the L4 behaviour. Hard coded application will be accepted. (Consider UX (e.g. sequence and grouping of your questions) and maintainability of the code and data quality (e.g. constrain rules).) | Alberto, Jannick |✅|
 | **L4** | | |
-| 1. Executable CDSS: Think about user interface considerations – what will make the system more or less acceptable and usable to end-users. | Alberto | |
+| 1. Executable CDSS: Think about user interface considerations – what will make the system more or less acceptable and usable to end-users. | Alberto ||
 | **QUALITY ASSURANCE TESTING:** | | |
 | 1. Design a risk-based testing approach, conduct tests to identify L2-L4 translation issues, and address any bugs or issues found. | Janick | |
 | **IDENTIFICATION, MONITORING AND EVALUATION STRATEGY:** | | |
