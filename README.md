@@ -34,7 +34,7 @@ Sexually Transmitted Infections (STIs) are a significant public health concern. 
 | **L4** | | |
 | 1. Executable CDSS: Think about user interface considerations – what will make the system more or less acceptable and usable to end-users. | Alberto |![done](https://img.shields.io/badge/done-brightgreen)|
 | **QUALITY ASSURANCE TESTING:** | | |
-| 1. Design a risk-based testing approach, conduct tests to identify L2-L4 translation issues, and address any bugs or issues found. | Janick | |
+| 1. Design a risk-based testing approach, conduct tests to identify L2-L4 translation issues, and address any bugs or issues found. | Erzhena| |
 | **IDENTIFICATION, MONITORING AND EVALUATION STRATEGY:** | | |
 | 1. Outline a plan for CDSS Implementation (how will it be provided to users and maintained? consider existing systems and user training) | Gerardo | |
 | 2. Describe the approach for monitoring and evaluation (what are the objectives at different stages of maturity?, what are the positive and negative impacts?, what methods will be used? what challenges does the group anticipate?) | Gerardo | |
