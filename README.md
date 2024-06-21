@@ -22,7 +22,7 @@ Sexually Transmitted Infections (STIs) are a significant public health concern. 
 | **L1** | | |
 | 1. Justification for Guidelines / Evidence (describe rationale for selection) | Alberto | |
 | 2. Statement About the Healthcare Need (describe rationale for the problem to address) | Alberto | |
-| 3. User Personas and Scenarios (Describe different users that will interact with the CDSS and provide 2 user scenarios on how the user will interact) | Erzhena | |
+| 3. User Personas and Scenarios (Describe different users that will interact with the CDSS and provide 2 user scenarios on how the user will interact) | Erzhena |  ![done](https://img.shields.io/badge/done-brightgreen) |
 | **L2** | | |
 | 1. BPMN (high level workflow) | Alberto, Janick | |
 | 2. Documentation (explain??) | Gerardo | |
