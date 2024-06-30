@@ -7,7 +7,7 @@ This repository contains the necessary files and instructions to deploy a Clinic
 ## Instructions
 
 1. **Download the Excel File**:
-   - Download the file [Initial Management of Genital Ulcers.xlsx]([L3/Initial Management of Genital Ulcers.xlsx](https://github.com/DatAlbertW/CDSS/blob/main/L3/Initial%20Management%20of%20Genital%20Ulcers.xlsx)).
+   - Download the file [Initial Management of Genital Ulcers.xlsx](https://github.com/DatAlbertW/CDSS/blob/main/L3/Initial%20Management%20of%20Genital%20Ulcers.xlsx).
 
 2. **Upload the File to ODK**:
    - Go to the [ODK XLSForm Online Tool](https://getodk.org/xlsform/).
