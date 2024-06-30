@@ -26,7 +26,7 @@ Sexually Transmitted Infections (STIs) are a significant public health concern. 
 | **L2** | | |
 | 1. BPMN (high level workflow) | Janick | |
 | 2. Documentation (explain??) | Gerardo | |
-| 3. Data Element Table (data dictionary: Include 30-50 data elements with labels, types, response options, conditional logic, and derived data elements, mapped to standards where possible.) | Alberto, Janick| |
+| 3. Data Element Table (data dictionary: Include 30-50 data elements with labels, types, response options, conditional logic, and derived data elements, mapped to standards where possible.) | Alberto, Janick| ✅|
 | 4. Decision Logic (Specify decision logic using diagrams (BPMN) or decision tables (e.g., WHO SMART Guideline DAK) for diagnoses, treatment, or other relevant recommendations.) | Gerardo, Erzhena| |
 | 5. Identify challenges in translation of the L1 to the L2 (where did decisions have to be taken or gaps filled?) | Alberto, Janick | |
 | **L3** | | |
