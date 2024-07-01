@@ -16,6 +16,9 @@ This repository contains the necessary files and instructions to deploy a Clinic
    - Follow the instructions on the ODK website to deploy the form to your ODK server.
    - Once deployed, the form will be available for use on ODK-compatible data collection apps.
 
+4. **Alternative**:
+   - Please click on the following link to access the the form in KoboToolbox: [Initial Management of Genital Ulcers](https://ee.kobotoolbox.org/x/ggdroia8)
+
 ## Task Description
 
 The task involved creating a machine-readable code for a clinical decision support system using any standard that drives the L4 behavior. Hard-coded applications were accepted with consideration for user experience (e.g., sequence and grouping of questions) and maintainability of the code and data quality (e.g., constraint rules).
