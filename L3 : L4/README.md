@@ -1,9 +1,17 @@
-## L3 Overview
+## L3-L4 Overview
 
-This repository contains the necessary files and instructions to deploy our Clinical Decision Support System (CDSS) for the initial management of genital ulcers.
+This repository contains the machine readable code created in[]() and instructions to deploy our Clinical Decision Support System (CDSS) for the initial management of genital ulcers.
 
-## Instructions
+## Instructions:
+* The machine readable code can be downloaded by clicking this link [/Initial Management of Genital Ulcers.xlsx
+](https://github.com/DatAlbertW/CDSS/blob/main/L3%20%3A%20L4/Initial%20Management%20of%20Genital%20Ulcers.xlsx).
+* The xlsx file was Deployed using KoboToolbox.
+* The file can be accessed directly in KoboToolbox or by loading the xlsx file in XLSForm Online.
 
+**KoboToolbox:**
+   - Please click on the following link to access the the form in KoboToolbox: [Initial Management of Genital Ulcers](https://ee.kobotoolbox.org/x/ggdroia8)
+
+**ODK Deployment:**
 1. **Download the Excel File**:
    - Download the file [Initial Management of Genital Ulcers.xlsx](https://github.com/DatAlbertW/CDSS/blob/main/L3/Initial%20Management%20of%20Genital%20Ulcers.xlsx).
 
@@ -15,9 +23,6 @@ This repository contains the necessary files and instructions to deploy our Clin
 3. **Deploy the Form**:
    - Follow the instructions on the ODK website to deploy the form to your ODK server.
    - Once deployed, the form will be available for use on ODK-compatible data collection apps.
-
-4. **Alternative**:
-   - Please click on the following link to access the the form in KoboToolbox: [Initial Management of Genital Ulcers](https://ee.kobotoolbox.org/x/ggdroia8)
 
 ## Task Description
 
