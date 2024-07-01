@@ -1,6 +1,6 @@
 ## L3 Overview
 
-This repository contains the necessary files and instructions to deploy a Clinical Decision Support System (CDSS) for the initial management of genital ulcers.
+This repository contains the necessary files and instructions to deploy our Clinical Decision Support System (CDSS) for the initial management of genital ulcers.
 
 ## Instructions
 
